@@ -1,0 +1,21 @@
+nav.navigation {
+    padding: var(--spacing) var(--spacing);
+    box-sizing: border-box;
+    height: 100vh;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .6);
+}
+
+
+
+.dark nav.navigation {
+}
+
+.navigation a {
+    display: block;
+    padding: var(--spacing);
+    margin: 0 calc(var(--spacing) * -1);
+}
+
+.navigation a:hover {
+    background: rgba(255, 255, 255, .2);
+}

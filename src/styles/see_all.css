@@ -1,0 +1,5 @@
+.see_all {
+    position: absolute;
+    bottom: var(--padding);
+    right: var(--padding);
+}

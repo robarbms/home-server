@@ -1,0 +1,7 @@
+.page {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    height: 100vh;
+    background-color: var(--main-bg-color);
+    color: var(--font-color);
+}

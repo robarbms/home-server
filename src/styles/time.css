@@ -1,0 +1,19 @@
+.time {
+    font-size: 4rem;
+    line-height: 4rem;
+    font-family: 'Segoe UI Narrow', Arial, sans-serif;
+    text-align: center;
+    margin: 0 0 var(--spacing);
+    color: var(--accent);
+}
+
+.time-zone {
+    font-size: 1rem;
+    line-height: 2.4rem;
+    text-align: right;
+}
+
+.time-zone label {
+    text-transform:capitalize;
+    font-weight: 700;
+}

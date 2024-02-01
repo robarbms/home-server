@@ -1,0 +1,7 @@
+.services label {
+    font-weight: 700;
+}
+
+.contact-info {
+    margin: 0 0 var(--spacing) var(--spacing);
+}

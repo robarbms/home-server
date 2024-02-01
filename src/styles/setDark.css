@@ -1,0 +1,26 @@
+.set-dark {
+    --dark-size: 20px;
+    --dark-width: 40px;
+    --dark-space: 2px;
+    background: rgba(255, 255, 255, .3);
+    height: calc(var(--dark-size) + (var(--dark-space) * 2));
+    width: calc(var(--dark-width) + (var(--dark-space) * 2));
+    border-radius: var(--dark-size);
+    position: relative;
+    cursor: pointer;
+}
+
+.dark-toggle {
+    height: var(--dark-size);
+    width: var(--dark-size);
+    border-radius: var(--dark-size);
+    background: rgba(0, 0, 0, .5);
+    left: var(--dark-space);
+    top: var(--dark-space);
+    position: absolute;
+    transition: left .3s ease-out;
+}
+
+.dark .dark-toggle {
+    left: calc(var(--dark-width) - var(--dark-size) + var(--dark-space));
+}
