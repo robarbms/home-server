@@ -1,3 +1,9 @@
+.services {
+    line-height: 2em;
+    display: flex;
+    flex-direction: column;    
+}
+
 .services label {
     font-weight: 700;
 }

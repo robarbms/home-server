@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Card from '../Card';
+import Card from './Card';
 import ReactCalendar from 'react-calendar';
 import '../../styles/calendar.css';
 

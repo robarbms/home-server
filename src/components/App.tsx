@@ -1,32 +1,55 @@
-import React, { MouseEvent, MouseEventHandler, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navigation from './Navigation';
-import site_navigation from '../data/navigation';
+import React, { useState, useEffect } from 'react';
 import '../styles/site.css';
-import Home from './pages/Home';
-import ServicesPage from './pages/Services';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { clientid, valid_users } from '../data/private';
+import { jwtDecode } from 'jwt-decode';
+import PageRouter from './pages/PageRouter';
 
+function login(email) {
+    document.cookie = `user=${email}`;
+}
 
 /**
  * Renders the basic shell for the site.
  * @returns App component
  */
 export default function App (): React.ReactElement {
-    const [ isDark, setIsDark ] = useState(true);
-    const setDark: MouseEventHandler = (e: MouseEvent): boolean => {
-        e.preventDefault();
-        setIsDark(!isDark);
-        return false;
+    const [logedin, setLogedin] = useState(false);
+
+    const isValidUser = (email) => !!valid_users.find(e => e === email);
+
+    const login = (resp) => {
+        const creds = jwtDecode(resp.credential);
+        if (isValidUser(creds.email)) {
+            setLogedin(true);
+        }
+        document.cookie = `user=${creds.email}`;
     }
 
+    useEffect(() => {
+        const userKeyValue = document.cookie
+            .split("; ")
+            .find(val => val.startsWith("user="));
+        if (userKeyValue) {
+            const value = userKeyValue.split("=")[1];
+            if (isValidUser(value)) {
+                setLogedin(true);
+            }
+        }
+    }, []);
+
     return (
-        <Router>
-            <Routes>
-                <Route path="/">
-                    <Route index element={<Home isDark={isDark} navigation={site_navigation} setDark={setDark} />} />
-                    <Route path="services" element={<ServicesPage isDark={isDark} navigation={site_navigation} setDark={setDark} />} />
-                </Route>
-            </Routes>
-        </Router>
+        <GoogleOAuthProvider clientId={clientid}>
+            {!logedin &&
+                <GoogleLogin
+                    onSuccess={login} 
+                    onError={() => {
+                        console.error('Login Failed');
+                    }} />
+            }
+            {logedin &&
+                <PageRouter />
+            }
+        </GoogleOAuthProvider>
     )
 }

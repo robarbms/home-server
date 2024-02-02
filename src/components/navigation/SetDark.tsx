@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from 'react';
-import '../styles/setDark.css';
+import '../../styles/setDark.css';
 
 type SetDarkProps = {
     setDark: MouseEventHandler

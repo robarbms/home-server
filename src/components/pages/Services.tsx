@@ -1,7 +1,7 @@
 import React from 'react';
 import {links, Link} from '../../data/services';
-import Page, { PageProps } from '../Page';
-import Card from '../Card';
+import Page, { PageProps } from './Page';
+import Card from '../tiles/Card';
 import {LabeledLink} from '../tiles/Services';
 
 
@@ -28,7 +28,7 @@ function ServiceTile(props) {
 
 
     return (
-        <Card size="2">
+        <Card>
             <h2><a href={link} target="_blank">{text}</a></h2>
             <ContactDetails {...props} />
             <ul className="cont-detail-links">
@@ -43,8 +43,7 @@ function ServiceTile(props) {
 
 export default function ServicesPage(props: PageProps) {
     return (
-        <Page isDark={props.isDark} navigation={props.navigation} setDark={props.setDark}>
-            <h1>Services</h1>
+        <Page isDark={props.isDark} navigation={props.navigation} setDark={props.setDark} title="Services">
             {links.map((service, index) => <ServiceTile {...service} key={index} />)}
         </Page>
     )

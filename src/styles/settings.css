@@ -1,0 +1,10 @@
+.color_option {
+    line-height: 2em;
+}
+.swatch {
+    width: 1.6em;
+    height: 1.6em;
+    display: inline-block;
+    margin: 0 5px 0 0;
+    vertical-align: middle;
+}

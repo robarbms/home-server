@@ -1,15 +1,15 @@
 .card {
-    --card-size: 12rem;
-    border-radius: var(--spacing);
+    --card-size: var(--block);
+    border-radius: 4px;
     display: inline-block;
     padding: var(--spacing);
-    margin: var(--spacing);
     width: var(--card-size);
     height: var(--card-size);
     border: 1px solid rgba(0, 0, 0, .2);
     vertical-align: top;
     box-shadow: -2px 2px 10px rgba(0, 0, 0, .3);
     position: relative;
+    box-sizing: border-box;
 }
 
 .card-2x {
@@ -20,5 +20,4 @@
     background: rgba(0, 0, 0, .2);
     border: none;
     box-shadow: none;
-    border-radius: 
 }

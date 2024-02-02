@@ -3,11 +3,13 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     padding: 0;
     margin: 0;
+    line-height: 1.6em;
     --main-bg-color: rgb(220, 220, 220);
-    --font-color: rgb(50, 55, 55);
+    --font-color: rgb(60, 70, 70);
     --spacing: 10px;
     --padding: 10px;
-    --accent: rgb(0, 106, 193);
+    --accent: rgb(0, 117, 234);
+    --block: 20rem;
 }
 
 a:link,
@@ -17,8 +19,8 @@ a:visited {
 }
 
 .dark {
-    --main-bg-color: rgb(50, 55, 55);
-    --font-color: rgb(220, 220, 220);
+    --main-bg-color: linear-gradient(20deg, rgb(22, 22, 22) 33%, rgb(45, 45, 45) 92%);
+    --font-color: rgb(150, 150, 150);
 }
 
 h1 {
@@ -26,11 +28,16 @@ h1 {
     font-weight: 100;
     font-size: 3em;
     color: var(--accent);
+    line-height: 1em;
 }
 
 h2 {
     font-weight: 100;
     margin: 0;
+}
+
+.dark h2 {
+    color: rgb(200, 200, 200);
 }
 
 a:link.link,

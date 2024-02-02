@@ -18,7 +18,7 @@ export default function NavSection(props: NavSectionProps) {
     const { group, navItems } = props;
     return (
         <div className="nav-section">
-            {group && <h3>{group}</h3>}
+            {group && <h2>{group}</h2>}
             {navItems.map((navItem, index) => <NavItem key={index} {...navItem} />)}
         </div>
     );

@@ -1,5 +1,5 @@
-import { NavItemProps } from '../components/NavItem';
-import { NavSectionProps } from '../components/NavSection';
+import { NavItemProps } from '../components/navigation/NavItem';
+import { NavSectionProps } from '../components/navigation/NavSection';
 
 export type SiteNavigationProps = NavSectionProps[]
 

@@ -2,6 +2,23 @@
     display: grid;
     grid-template-columns: 120px 1fr;
     height: 100vh;
-    background-color: var(--main-bg-color);
+    background: var(--main-bg-color);
     color: var(--font-color);
+    position: relative;
+}
+
+.content-area {
+    display: grid;
+    grid-template-rows: 4rem 1fr;
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    flex-wrap: wrap;
+    gap: var(--spacing);
+    padding: var(--spacing);
+    box-sizing: border-box;
 }

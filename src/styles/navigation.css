@@ -3,11 +3,13 @@ nav.navigation {
     box-sizing: border-box;
     height: 100vh;
     box-shadow: 0 0 5px rgba(0, 0, 0, .6);
+    background: rgba(0, 0, 0, .1);
 }
 
 
 
 .dark nav.navigation {
+    background: rgba(0, 0, 0, .5);
 }
 
 .navigation a {

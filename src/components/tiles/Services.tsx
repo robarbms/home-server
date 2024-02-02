@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../Card';
+import Card from './Card';
 import {links, Link} from '../../data/services';
 import '../../styles/services.css';
 import {Link as RouterLink} from 'react-router-dom';
@@ -33,7 +33,7 @@ export default function Services() {
     return (
         <Card size="2">
             <div className="services">
-                <h2><RouterLink to="services">Services</RouterLink></h2>
+                <h2><RouterLink to="services">Utilities and Services</RouterLink></h2>
                 {links.map((link, index) => <ServiceContact {...link} key={index} />)}
                 <SeeAll page="services" />
             </div>
