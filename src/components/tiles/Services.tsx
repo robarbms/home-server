@@ -1,4 +1,4 @@
-4import React from 'react';
+import React from 'react';
 import Card from './Card';
 import {links, Link} from '../../data/services';
 import '../../styles/services.css';
