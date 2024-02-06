@@ -1,5 +1,5 @@
-dev
-dist
+dev/
+dist/
 node_modules
 .env
 src/data/private.ts
