@@ -5,6 +5,9 @@ import Calendar from '../tiles/Calendar';
 import Birthdays from '../tiles/Birthdays';
 import Services from '../tiles/Services';
 import Streaming from '../tiles/Streaming';
+import HomePasswords from '../tiles/HomePasswords';
+import AI from '../tiles/AI';
+import Events from '../tiles/Events';
 
 
 export default function Home(props: PageProps) {
@@ -13,8 +16,10 @@ export default function Home(props: PageProps) {
             <Time></Time>
             <Calendar></Calendar>
             <Birthdays></Birthdays>
+            <HomePasswords></HomePasswords>
+            <Events></Events>
+            <AI></AI>
             <Services></Services>
-            <Streaming></Streaming>
         </Page>
     );
 }

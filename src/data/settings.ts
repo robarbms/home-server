@@ -8,7 +8,7 @@ export const settings = {
         },
         {
             name: "Green",
-            value: "rgb(0, 159, 3)",
+            value: "rgb(30, 130, 30)",
             contrast: "",
             compliment: ""
         },
@@ -32,13 +32,13 @@ export const settings = {
         },
         {
             name: "Red",
-            value: "rgb(203, 0, 0)",
+            value: "rgb(175, 20, 20)",
             contrast: "",
             compliment: ""
         },
         {
             name: "Purple",
-            value: "rgb(128, 0, 220)",
+            value: "rgb(107, 26, 165)",
             contrast: "",
             compliment: ""
         },

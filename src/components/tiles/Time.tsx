@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Card from './Card';
 import '../../styles/time.css';
+import World from '../../assets/world.svg';
 
 
 const weekdays = [
@@ -12,7 +13,8 @@ const weekdays = [
     "Friday",
     "Saturday"
 ];
-const months = [
+
+export const months = [
     "January",
     "Febuary",
     "March",
@@ -39,7 +41,23 @@ type TimesKeys = keyof Times;
 type TimeOptions = {
     hour: 'numeric' | '2-digit' | undefined,
     minute: 'numeric' | '2-digit' | undefined,
-    hour12: boolean
+    hour12: boolean,
+    weekday?: string,
+    month?: string,
+    day?: string
+}
+
+function TimeZone(props) {
+    const {label, time} = props;
+    const capitolize = (str) => str.substr(0, 1).toUpperCase() + str.substr(1);
+    return (
+        <div className="time-zone">
+            <h4>{capitolize(label)}</h4>
+            <div className="time-zone-info">
+                {capitolize(time?.toLowerCase())}
+            </div>
+        </div>
+    )
 }
 
 export default function Time() {
@@ -62,11 +80,17 @@ export default function Time() {
             minute: '2-digit',
             hour12: true,
         }
+
+        const date_opts = {
+            weekday: "short",
+        }
+
         const newTime: Times = {};
 
         for (let key in timeZones) {
+            if (key == "seattle") continue;
             const timeZone: string | undefined = timeZones[key as keyof Times];
-            const opts = Object.assign({}, base_opts, (key === "current" ? {} : { timeZone }));
+            const opts = Object.assign({}, base_opts, (key === "current" ? {} : Object.assign({}, date_opts, { timeZone })));
             const formatter = new Intl.DateTimeFormat([], opts);
             const time = formatter.format(now);
             if (time !== newTime["current"]) {
@@ -118,7 +142,8 @@ export default function Time() {
     }, []);
     
     return(
-        <Card>
+        <Card addClass="time-card">
+            <img src={World} className="world_svg" />
             <div className="time">{time.current}</div>
             <div className="date">
                 <h2>{date.weekday}</h2>
@@ -126,7 +151,7 @@ export default function Time() {
             </div>
             {getOtherZones().map((zone, index) => {
                 return (
-                    <div className="time-zone" key={index}><label>{zone.label}</label> {zone.time?.toLowerCase()}</div>
+                    <TimeZone key={index} {...zone} />
                 );
             })}
         </Card>

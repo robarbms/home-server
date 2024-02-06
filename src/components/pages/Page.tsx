@@ -21,7 +21,7 @@ export type PageProps = {
  */
 export default function Page(props: PageProps) : React.ReactElement {
     return (
-        <div className={`page${props.isDark ? ' dark' : ''}`}>
+        <div className={`page${props.isDark ? ' dark' : ''} ${props.title ? 'page-with-title' : ''}`}>
             <Navigation setDark={props.setDark} navigation={props.navigation} />
             <div className="content-area">
                 {props.title &&

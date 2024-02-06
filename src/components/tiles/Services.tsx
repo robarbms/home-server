@@ -1,4 +1,4 @@
-import React from 'react';
+4import React from 'react';
 import Card from './Card';
 import {links, Link} from '../../data/services';
 import '../../styles/services.css';
@@ -19,12 +19,22 @@ export function LabeledLink (props: {label: string, link: string}) {
     )
 }
 
-function ServiceContact (props: Link) {
-    const {text, link} = props;
+export function Contact (props: Link) {
+    const {text, link, phone, hours, links} = props;
 
     return (
-        <div className="util-cont">
-            <div className="contact"><a className="link" href={link} target="_blank">{text}</a></div>
+        <div className="util_cont">
+            <h4><a className="link" href={link} target="_blank">{text}</a></h4>
+            <div>
+                {phone && <LabeledLink label="Phone" link={phone} />}
+                {hours && <LabeledLink label="Hours" link={hours} />}
+                <div className="more_links">
+                    {links && links.length > 0 && <strong>More links:</strong> }
+                    {links?.map((more, index) => (
+                        <a href={more.link} key={index}>{more.text}</a>
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }
@@ -34,8 +44,9 @@ export default function Services() {
         <Card size="2">
             <div className="services">
                 <h2><RouterLink to="services">Utilities and Services</RouterLink></h2>
-                {links.map((link, index) => <ServiceContact {...link} key={index} />)}
-                <SeeAll page="services" />
+                <div className="serv_cont">
+                    {links.map((link, index) => <Contact {...link} key={index} />)}
+                </div>
             </div>
         </Card>
     )

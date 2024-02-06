@@ -8,8 +8,8 @@
     "build": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "report": "webpack --mode=production --performance-hints warning",
-    "start": "http-server ./dev",
-    "start:prod": "http-server ./dist --node-env=production",
+    "start": "http-server ./dev -p 80 --proxy http://localhost:80?",
+    "start:prod": "http-server ./dist --node-env=production -p 80 --proxy http://localhost:80?",
     "watch": "webpack --watch"
   },
   "repository": {

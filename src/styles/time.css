@@ -22,10 +22,20 @@
 
 .time-zone {
     font-size: 1rem;
-    text-align: right;
+    margin: 0 0 var(--spacing);
+    position: relative;
+    display: inline-block;
+    min-width: calc(var(--block) / 2.2)
 }
 
 .time-zone label {
     text-transform:capitalize;
     font-weight: 700;
+}
+
+.world_svg {
+    width: 90%;
+    position: absolute;
+    bottom: 10px;
+    opacity: .15;
 }

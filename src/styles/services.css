@@ -11,3 +11,28 @@
 .contact-info {
     margin: 0 0 var(--spacing) var(--spacing);
 }
+
+.serv_cont {
+}
+
+.util_cont {
+    width: 200px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.util_cont h4 {
+    color: #000;
+}
+
+.dark .util_cont h4 {
+    color: #fff;
+}
+
+.more_links a {
+    margin: 0 0 0 5px;
+}
+
+.more_links a + a::before {
+    content: '| ';
+}

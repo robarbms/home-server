@@ -1,24 +1,35 @@
 .page {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    height: 100vh;
+    min-height: 100vh;
     background: var(--main-bg-color);
     color: var(--font-color);
-    position: relative;
 }
 
-.content-area {
+.page-with-title .content-area {
     display: grid;
     grid-template-rows: 4rem 1fr;
 }
 
 .content {
-    width: 100%;
+    max-width: 1340px;
     display: flex;
     flex-direction: row;
-    height: 100%;
+    min-height: 100%;
     flex-wrap: wrap;
     gap: var(--spacing);
     padding: var(--spacing);
     box-sizing: border-box;
+    align-content: start;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 600px) {
+    .page {
+        display: block;
+    }
+
+    div.card {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
 }

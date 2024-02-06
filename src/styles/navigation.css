@@ -1,15 +1,26 @@
+
 nav.navigation {
+    --nav-back: rgba(200, 200, 200, .5);
     padding: var(--spacing) var(--spacing);
     box-sizing: border-box;
-    height: 100vh;
+    height: 100%;
     box-shadow: 0 0 5px rgba(0, 0, 0, .6);
-    background: rgba(0, 0, 0, .1);
+    background: var(--nav-back);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    width: 120px;
+    transition: right ease-out .3s;
 }
 
-
+nav.navigation.nav_close {
+    right: -120px;
+}
 
 .dark nav.navigation {
-    background: rgba(0, 0, 0, .5);
+    --nav-back: rgba(20, 20, 20, .5);
 }
 
 .navigation a {
@@ -18,6 +29,48 @@ nav.navigation {
     margin: 0 calc(var(--spacing) * -1);
 }
 
-.navigation a:hover {
+.navigation a:hover,
+.color_option:hover {
+    background: rgba(0, 0, 0, .1);
+}
+
+.dark .navigation a:hover,
+.dark .color_option:hover {
     background: rgba(255, 255, 255, .2);
+}
+
+.nav-section {
+    padding: var(--spacing) 0;
+}
+
+.nav-section + .nav-section {
+    border-top: 1px solid;
+}
+
+.drawer_open {
+    position: absolute;
+    left: -40px;
+}
+
+.settings_open,
+.settings_close {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-weight: bold;
+    background: var(--nav-back);
+    padding: 10px;
+    border-radius: 6px 0 0 6px;
+}
+
+.settings_open svg {
+    fill: currentColor;
+}
+
+.settings_close {
+}
+
+.nav_open .settings_open,
+.nav_close .settings_close {
+    display: none;
 }

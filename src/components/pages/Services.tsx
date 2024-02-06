@@ -33,7 +33,7 @@ function ServiceTile(props) {
             <ContactDetails {...props} />
             <ul className="cont-detail-links">
                 {links && links.length > 0 &&
-                    links.map(({text, link}, index) => <li><a href={link} target="_blank">{text}</a></li>)
+                    links.map(({text, link}, index) => <li key={index}><a href={link} target="_blank">{text}</a></li>)
                 }
             </ul>
         </Card>

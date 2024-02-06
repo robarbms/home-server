@@ -10,6 +10,17 @@ export type Link = {
 
 export const links: Link[] = [
     {
+        text: "Shorecrest High School",
+        link: "https://shorecrest.ssd412.org/",
+        phone: "206-393-4286",
+        links: [
+            {
+                text: "Calendar",
+                link: "https://shorecrest.ssd412.org/about-us/calendar"
+            }
+        ]
+    },
+    {
         text: "Puget Sound Electric (PSE)",
         link: "https://www.pse.com/",
         phone: "1-888-225-5773",
@@ -51,32 +62,4 @@ export const links: Link[] = [
             }
         ]
     },
-    {
-        text: "Lake Forest Park Town Center",
-        link: "https://www.towncenteratlakeforest.com/",
-        hours: "Sun-Sat 9am-9pm",
-        links: [
-            {
-                text: "Events",
-                link: "https://www.towncenteratlakeforest.com/events/"
-            }
-        ]
-    },
-    {
-        text: "Third Place Commons",
-        link: "https://www.thirdplacecommons.org/",
-        phone: "206-366-3302",
-        email: "programs@thirdplacecommons.org",
-        hours: "Mon-Thu 7am-9pm; Fri-Sat 7am-10pm; Sun 7am-8pm",
-        links: [
-            {
-                text: "Events",
-                link: "https://www.thirdplacecommons.org/events/"
-            },
-            {
-                text: "Calendar",
-                link: "https://www.thirdplacecommons.org/calendar/"
-            }
-        ]
-    }
 ];
