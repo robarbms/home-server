@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Card from './Card';
 import '../../styles/time.css';
-import World from '../../assets/world.svg';
+import WorldLogo from './WorldLogo';
 
 
 const weekdays = [
@@ -52,7 +52,7 @@ function TimeZone(props) {
     const capitolize = (str) => str.substr(0, 1).toUpperCase() + str.substr(1);
     return (
         <div className="time-zone">
-            <h4>{capitolize(label)}</h4>
+            <h3>{capitolize(label)}</h3>
             <div className="time-zone-info">
                 {capitolize(time?.toLowerCase())}
             </div>
@@ -143,7 +143,6 @@ export default function Time() {
     
     return(
         <Card addClass="time-card">
-            <img src={World} className="world_svg" />
             <div className="time">{time.current}</div>
             <div className="date">
                 <h2>{date.weekday}</h2>

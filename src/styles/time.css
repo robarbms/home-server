@@ -5,10 +5,12 @@
     text-align: center;
     margin: 0 0 var(--spacing);
     color: var(--accent);
+    height: 64px;
 }
 
 .date {
     text-align: center;
+    height: 63px;
 }
 
 .date::after {

@@ -22,7 +22,7 @@ a:visited {
 .dark {
     --background-solid: rgb(22, 22, 22);
     --main-bg-color: linear-gradient(20deg, var(--background-solid) 33%, rgb(45, 45, 45) 92%);
-    --font-color: rgb(150, 150, 150);
+    --font-color: rgb(180, 180, 180);
 }
 
 h1 {

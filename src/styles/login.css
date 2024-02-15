@@ -1,0 +1,16 @@
+.login {
+    min-height: 100vh;
+    background: var(--main-bg-color);
+    color: var(--font-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login input {
+    font-size: 4em;
+    width: 1em;
+    margin: 1em;
+    border: 0;
+    border-radius: 6px;
+}

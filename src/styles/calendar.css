@@ -51,7 +51,7 @@
     position: relative;
 }
 
-.birday:after {
+.birday::after {
     content: '';
     border: 2px var(--accent) solid;
     border-radius: 50%;

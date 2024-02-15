@@ -2,13 +2,13 @@ import React, { MouseEvent, MouseEventHandler, useState, useEffect } from 'react
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import ServicesPage from './Services';
-import Navigation from '../navigation/Navigation';
 import site_navigation from '../../data/navigation';
-import {getCookie} from '../utils/cookies';
 import {loadSettings} from '../navigation/Settings';
+import Login from '../login/Login';
 
 export default function PageRouter() {
     const [ isDark, setIsDark ] = useState(true);
+    const [loggedin, setLoggedin] = useState(false);
     const setDark: MouseEventHandler = (e: MouseEvent): boolean => {
         e.preventDefault();
         document.cookie = `isDark=${!isDark ? 'true' : 'false'}`;
@@ -23,7 +23,7 @@ export default function PageRouter() {
         }
     }, []);
 
-    return (
+    return (loggedin ?
         <Router>
             <Routes>
                 <Route path="/">
@@ -31,6 +31,7 @@ export default function PageRouter() {
                     <Route path="services" element={<ServicesPage isDark={isDark} navigation={site_navigation} setDark={setDark} />} />
                 </Route>
             </Routes>
-        </Router>
+        </Router> :
+        <Login setLogin={setLoggedin} isDark={isDark} />
     )
 } 

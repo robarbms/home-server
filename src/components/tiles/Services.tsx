@@ -24,7 +24,7 @@ export function Contact (props: Link) {
 
     return (
         <div className="util_cont">
-            <h4><a className="link" href={link} target="_blank">{text}</a></h4>
+            <h3><a className="link" href={link} target="_blank">{text}</a></h3>
             <div>
                 {phone && <LabeledLink label="Phone" link={phone} />}
                 {hours && <LabeledLink label="Hours" link={hours} />}

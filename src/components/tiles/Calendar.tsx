@@ -20,7 +20,7 @@ export default function Calendar () {
         }
     }
     return (
-        <Card size="2">
+        <Card size="2" addClass="calendar_card">
             <ReactCalendar tileClassName={setClass} calendarType="gregory" />
         </Card>
     )

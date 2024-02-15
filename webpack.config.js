@@ -1,10 +1,12 @@
-const Dotenv = require('dotenv-webpack');
+const Dotenv = require('dotenv-webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const CopyPlugin = require('copy-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 
 const mergeOptions = (defaults, overrides, deep = ['module', 'optimization', 'resolve']) => {
     const config = {}
@@ -39,7 +41,7 @@ module.exports = (env, argv) => {
                     use: ['style-loader', 'css-loader', 'postcss-loader']
                 },
                 {
-                    test: /\.(jpg|png|svg|gif|ttf|pdf|webp|ico)$/,
+                    test: /\.(jpg|png|svg|gif|ttf|pdf|webp|ico|json)$/,
                     type: 'asset/resource'
                 },
                 {
@@ -69,14 +71,19 @@ module.exports = (env, argv) => {
                 collapseWhitespace: true,
                 removeComments: true,
               },
-              favicon: favicon
+              favicon: favicon,
             }),
             new MiniCssExtractPlugin({
               filename: 'styles.css',
             }),
+            new CopyPlugin({
+                patterns: [
+                    { from: "src/manifest.json"},
+                ]
+            })
         ],
         resolve: {
-            extensions: ['.tsx', '.ts', '.js']
+            extensions: ['.tsx', '.ts', '.js', '.json']
         },
         watch: false,
         watchOptions: {
@@ -91,8 +98,11 @@ module.exports = (env, argv) => {
                 path: path.resolve(__dirname, 'dev'),
             },
             optimization: {
-                minimizer: [],
-                minimize: false
+                minimizer: [
+                    new TerserPlugin(),
+                    new CssMinimizerPlugin()
+                ],
+                minimize: true
             },
             plugins: [
                 new Dotenv(),
@@ -102,8 +112,17 @@ module.exports = (env, argv) => {
                     collapseWhitespace: false,
                     removeComments: false,
                   },
-                  favicon: favicon
-                })
+                  favicon: favicon,
+                }),
+                new MiniCssExtractPlugin({
+                    filename: 'styles.css',
+                  }),
+                new CopyPlugin({
+                    patterns: [
+                        "pwa"
+                    ]
+                }),
+                new CompressionPlugin(),
             ],
             watch: true
         }
