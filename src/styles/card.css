@@ -21,3 +21,10 @@
     background: rgb(28, 28, 28);
     border: none;
 }
+
+@media screen and (max-width: 600px) {
+    .card,
+    div.card-2x {
+        height: auto;
+    }
+}

@@ -35,3 +35,11 @@
 .more_links a + a::before {
     content: '| ';
 }
+
+@media screen and (max-width: 600px) {
+    .util_cont {
+        width: auto;
+        display: block;
+    }
+
+}
