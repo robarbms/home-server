@@ -22,7 +22,7 @@
     margin: 0 auto;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 686px) {
     body {
         line-height: 2em;
     }
@@ -42,5 +42,15 @@
 
     div.calendar_card {
         height: var(--block);
+    }
+}
+
+@media screen and (max-width: 1016px) {
+    div.card:nth-child(3),
+    div.card:nth-child(1) {
+        order: -1;
+    }
+    div.card:nth-child(6) {
+        order: 1;
     }
 }
