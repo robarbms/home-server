@@ -3,7 +3,7 @@ import Card from './Card';
 import '../../styles/time.css';
 import WorldLogo from './WorldLogo';
 
-
+// Helper list containing the names of the weekdays
 const weekdays = [
     "Sunday",
     "Monday",
@@ -14,6 +14,7 @@ const weekdays = [
     "Saturday"
 ];
 
+// Helper list containing the names of the months
 export const months = [
     "January",
     "Febuary",
@@ -28,6 +29,7 @@ export const months = [
     "December"
 ];
 
+// Properties for the times list
 type Times = {
     current?: string,
     seattle?: string,
@@ -36,33 +38,48 @@ type Times = {
     hawaii?: string
 }
 
+// Keys used in the Times type
 type TimesKeys = keyof Times;
 
-type TimeOptions = {
-    hour: 'numeric' | '2-digit' | undefined,
-    minute: 'numeric' | '2-digit' | undefined,
-    hour12: boolean,
-    weekday?: string,
-    month?: string,
-    day?: string
+// Properties used for the TimeZone component
+type TimeZoneProps = {
+    label: string,
+    time?: string
 }
 
-function TimeZone(props) {
+// Properties used by the date object
+type DateProps = {
+    weekday: string,
+    day: number,
+    month: string,
+    year: number
+}
+
+/**
+ * Rendering of a time zone with label and the current time
+ * @param props 
+ * @returns 
+ */
+function TimeZone(props: TimeZoneProps) {
     const {label, time} = props;
-    const capitolize = (str) => str.substr(0, 1).toUpperCase() + str.substr(1);
+    const capitolize = (str: string) => str.substr(0, 1).toUpperCase() + str.substr(1);
     return (
         <div className="time-zone">
             <h3>{capitolize(label)}</h3>
             <div className="time-zone-info">
-                {capitolize(time?.toLowerCase())}
+                {time ? capitolize(time.toLowerCase()) : ""}
             </div>
         </div>
     )
 }
 
+/**
+ * Rendering for the Time card
+ * @returns 
+ */
 export default function Time() {
-    const [time, setTime]: [Times, (times: Times) => void] = useState({});
-    const [date, setDate] = useState({});
+    const [time, setTime]: [Times | undefined, (times: Times) => void] = useState();
+    const [date, setDate]: [DateProps | undefined, (date: DateProps) => void] = useState();
     const timeHandle = useRef();
     const timeZones: Times = {
         current: "",
@@ -75,7 +92,7 @@ export default function Time() {
     const updateTimes = () => {
         const now: Date = new Date();
         const getMinutes = (mins: number): string => `${mins < 10 ? '0' : ''}${mins}`;
-        const base_opts: TimeOptions = {
+        const base_opts: Intl.DateTimeFormatOptions = {
             hour: 'numeric',
             minute: '2-digit',
             hour12: true,
@@ -100,14 +117,14 @@ export default function Time() {
         newTime["current"] = newTime.current?.replace(/AM|PM/i, "");
 
         setTime(newTime);
-        if (date.day && now.getDate != date.day) {
+        if (date && date.day && now.getDate() != date.day) {
             updateDate();
         }
     }
 
     const updateDate = () => {
         const now = new Date();
-        const date_parse = {
+        const date_parse: DateProps = {
             weekday: weekdays[now.getDay()],
             month: months[now.getMonth()],
             day: now.getDate(),
@@ -116,14 +133,14 @@ export default function Time() {
         setDate(date_parse);
     }
 
-    const getOtherZones = () => {
+    const getOtherZones = (): TimeZoneProps[] => {
         const zones = [];
         for (let label in time) {
             if (label !== "current") {
                 zones.push({
                     label,
                     time: time[label as keyof Times]
-                });
+                } as TimeZoneProps);
             }
         }
         return zones;
@@ -143,16 +160,18 @@ export default function Time() {
     
     return(
         <Card addClass="time-card">
-            <div className="time">{time.current}</div>
+            <div className="time">{time && time.current}</div>
             <div className="date">
-                <h2>{date.weekday}</h2>
-                {date.month} {date.day}, {date.year}
+                <h2>{date && date.weekday}</h2>
+                {date && date.month} {date && date.day}, {date && date.year}
             </div>
-            {getOtherZones().map((zone, index) => {
-                return (
-                    <TimeZone key={index} {...zone} />
-                );
-            })}
+            <React.Fragment>
+                {getOtherZones().map((zone: TimeZoneProps, index: number) => {
+                    return (
+                        <TimeZone key={index} {...zone} />
+                    );
+                })}
+            </React.Fragment>
         </Card>
     )
 }

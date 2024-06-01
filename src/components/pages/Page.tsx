@@ -1,7 +1,8 @@
-import React, { MouseEventHandler } from "react";
+import React, { MouseEventHandler, useContext } from "react";
 import Navigation, { NavigationProps } from "../navigation/Navigation";
 import { SiteNavigationProps  } from "../../data/navigation";
 import '../../styles/page.css';
+import {ThemeContext} from '../App';
 
 /**
  * Properties used to render the page layout
@@ -9,8 +10,6 @@ import '../../styles/page.css';
 export type PageProps = {
     navigation: SiteNavigationProps,
     children?: React.ReactElement | React.ReactElement[],
-    isDark: boolean,
-    setDark: MouseEventHandler,
     title?: string
 }
 
@@ -20,9 +19,10 @@ export type PageProps = {
  * @returns 
  */
 export default function Page(props: PageProps) : React.ReactElement {
+    const theme = useContext(ThemeContext);
     return (
-        <div className={`page${props.isDark ? ' dark' : ''} ${props.title ? 'page-with-title' : ''}`}>
-            <Navigation setDark={props.setDark} navigation={props.navigation} />
+        <div className={`page${theme.isDark ? ' dark' : ''} ${props.title ? 'page-with-title' : ''}`}>
+            <Navigation navigation={props.navigation} />
             <div className="content-area">
                 {props.title &&
                     <h1>{props.title}</h1>

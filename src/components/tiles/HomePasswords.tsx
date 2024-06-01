@@ -3,7 +3,18 @@ import Card from './Card';
 import {passwords} from '../../data/private';
 import '../../styles/home_passwords.css';
 
-function PWItemLine(props) {
+// Password line item properties
+type PWItemLineProps = {
+    label: string,
+    value: string
+}
+
+/**
+ * Rendering of a password line item
+ * @param props 
+ * @returns 
+ */
+function PWItemLine(props: PWItemLineProps) {
     const {label, value} = props;
     return (
         <div className="pw_item_entry">
@@ -12,7 +23,18 @@ function PWItemLine(props) {
     )
 }
 
-function getItemLine(item) {
+// Password entry properties
+type LineItemProperties = {
+    SSID?: string,
+    Code?: string,
+    Service?: string,
+    Login?: string,
+    Password?: string
+}
+
+type EntryKeys = keyof LineItemProperties;
+
+function getItemLine(item: LineItemProperties) {
     const lineItems = [];
     let idx = 0;
     for (let key in item) {
@@ -22,22 +44,13 @@ function getItemLine(item) {
     return lineItems;
 }
 
-function PWItem(props) {
-    return (
-        <div className="password_item">
-            {props.login_label &&
-                <div className="pw_item_entry">
-                    <label>{props.login_label}</label> {props.login}
-                </div>
-            }
-            <div className="pw_item_entry">
-                <label>Password</label> {props.password}
-            </div>
-        </div>
-    )
+// Password group properties
+type PWGroupProps = {
+    group: string,
+    items: LineItemProperties[],
 }
 
-function PWGroup(props) {
+function PWGroup(props: PWGroupProps) {
     return (
         <div className="password_group">
             <h3>{props.group}</h3>
@@ -53,10 +66,13 @@ function PWGroup(props) {
 }
 
 export default function HomePasswords() {
+    const passwordElements: React.JSX.Element[] = passwords.map((group: PWGroupProps, index: number) => <PWGroup {...group} key={index} />);
     return (
         <Card size="2">
             <h2>Passwords</h2>
-            {passwords.map((group, index) => <PWGroup {...group} key={index} />)}
+            <React.Fragment>
+                {passwordElements}
+            </React.Fragment>
         </Card>
     )
 }

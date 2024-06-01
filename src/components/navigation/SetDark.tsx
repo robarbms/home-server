@@ -1,15 +1,14 @@
-import React, { MouseEventHandler } from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../App';
 import '../../styles/setDark.css';
 
-type SetDarkProps = {
-    setDark: MouseEventHandler
-}
+export default function SetDark() {
+    const theme = useContext(ThemeContext);
 
-export default function SetDark(props: SetDarkProps) {
     return (
         <div>
             <h3>Dark mode</h3>
-            <div className="set-dark" onClick={props.setDark}>
+            <div className="set-dark" onClick={theme.toggleTheme}>
                 <div className="dark-toggle"></div>
             </div>
         </div>

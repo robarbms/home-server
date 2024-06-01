@@ -6,16 +6,13 @@ import '../../styles/navigation.css';
 import Settings from './Settings';
 
 export type NavigationProps = {
-    navigation: SiteNavigationProps,
-    setDark: MouseEventHandler
+    navigation: SiteNavigationProps
 }
 
 export default function Navigation(props: NavigationProps) : React.ReactElement {
     const { navigation } = props;
     const navSections = navigation.map((navSection, index) => <NavSection key={index} {...navSection} />)
     const [drawerOpen, setDrawerOpen] = useState(false);
-
-
 
     return (
         <nav className={`navigation nav_${drawerOpen ? 'open' : 'close'}`}>
@@ -27,7 +24,7 @@ export default function Navigation(props: NavigationProps) : React.ReactElement 
                 </div>
                 <div className="settings_close" onClick={setDrawerOpen.bind(null, false)}>X</div>
             </div>
-            <Settings setDark={props.setDark} />
+            <Settings />
         </nav>
     )
 }

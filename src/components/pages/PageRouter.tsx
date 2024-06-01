@@ -1,4 +1,4 @@
-import React, { MouseEvent, MouseEventHandler, useState, useEffect } from 'react';
+import React, { useState, createContext } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import ServicesPage from './Services';
@@ -6,32 +6,35 @@ import site_navigation from '../../data/navigation';
 import {loadSettings} from '../navigation/Settings';
 import Login from '../login/Login';
 
-export default function PageRouter() {
-    const [ isDark, setIsDark ] = useState(true);
-    const [loggedin, setLoggedin] = useState(false);
-    const setDark: MouseEventHandler = (e: MouseEvent): boolean => {
-        e.preventDefault();
-        document.cookie = `isDark=${!isDark ? 'true' : 'false'}`;
-        setIsDark(!isDark);
-        return false;
-    }
+/**
+ * Context used for tracking logged in state
+ */
+export const LoginContext = createContext({
+    loggedin: false,
+    setLoggedin: (val: boolean) => {}
+});
 
-    useEffect(() => {
-        const currentSettings = loadSettings();
-        if (isDark != currentSettings.isDark) {
-            setIsDark(currentSettings.isDark == 'true');
-        }
-    }, []);
+/**
+ * Routes to the home page if logged in, otherwise it shows the login screen
+ */
+export default function PageRouter() {
+    const [loggedin, setLoggedin] = useState(false);
+
+    const value = {
+        loggedin,
+        setLoggedin
+    }
 
     return (loggedin ?
         <Router>
             <Routes>
                 <Route path="/">
-                    <Route index element={<Home isDark={isDark} navigation={site_navigation} setDark={setDark} />} />
-                    <Route path="services" element={<ServicesPage isDark={isDark} navigation={site_navigation} setDark={setDark} />} />
+                    <Route index element={<Home navigation={site_navigation} />} />
                 </Route>
             </Routes>
         </Router> :
-        <Login setLogin={setLoggedin} isDark={isDark} />
+        <LoginContext.Provider value={value}>
+            <Login />
+        </LoginContext.Provider>
     )
 } 

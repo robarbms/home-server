@@ -6,27 +6,26 @@ import '../../styles/settings.css';
 import {getCookie} from '../utils/cookies';
 
 export function loadSettings() {
-    const defaults = {
-        isDark: true,
+    const defaults: {
+        isDark: string,
+        accent: string
+    } = {
+        isDark: 'true',
         accent: settings.accents[0].value
     }
 
     const cookies = getCookie();
 
-    for(let key in defaults) {
-        if (key in cookies) {
-            defaults[key] = cookies[key];
-        }
-    }
+    const merged_settings = Object.assign({}, defaults, cookies);
 
-    return defaults;
+    return merged_settings;
 }
 
-export default function Settings(props) {
+export default function Settings() {
     return (
         <div className="settings nav-section">
             <h2>Settings</h2>
-            <SetDark setDark={props.setDark} />
+            <SetDark />
             <ColorPicker accents={settings.accents} />
         </div>
     )

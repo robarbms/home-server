@@ -8,11 +8,12 @@ import Streaming from '../tiles/Streaming';
 import HomePasswords from '../tiles/HomePasswords';
 import AI from '../tiles/AI';
 import Events from '../tiles/Events';
+import {ThemeContext} from '../App';
 
 
 export default function Home(props: PageProps) {
     return (
-        <Page isDark={props.isDark} navigation={props.navigation} setDark={props.setDark}>
+        <Page navigation={props.navigation}>
             <Time></Time>
             <Calendar></Calendar>
             <Birthdays></Birthdays>
