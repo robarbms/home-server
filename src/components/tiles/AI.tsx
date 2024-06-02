@@ -14,7 +14,7 @@ export default function AI() {
             <h3>Text Generation</h3>
             <a href="http://home:3000" className="button" target="_blank">Ollama - WebUI</a>
             <h3>Image Generation</h3>
-            <a href="/other/" className="button" onClick={(e: React.MouseEvent | TargetPort) => e.target.port="8188"} target="_blank">ComfyUI</a>
+            <a href="http://home:8188" className="button" target="_blank">ComfyUI</a>
             <h3>Resources</h3>
         </Card>
     )
