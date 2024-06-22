@@ -13,6 +13,7 @@ nav.navigation {
     z-index: 1;
     width: 120px;
     transition: right ease-out .3s;
+    backdrop-filter: blur(4px);
 }
 
 nav.navigation.nav_close {

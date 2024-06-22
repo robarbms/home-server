@@ -10,7 +10,7 @@
     box-shadow: 0 0 6px rgba(0, 0, 0, .3);
     position: relative;
     box-sizing: border-box;
-    background: rgb(235, 235, 235);
+    background: rgba(0, 0, 0, .05);
 }
 
 .card-2x {
@@ -18,7 +18,7 @@
 }
 
 .dark .card {
-    background: rgb(28, 28, 28);
+    background: rgba(0, 0, 0, .1);
     border: none;
 }
 
