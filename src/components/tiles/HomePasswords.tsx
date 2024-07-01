@@ -38,7 +38,7 @@ function getItemLine(item: LineItemProperties) {
     const lineItems = [];
     let idx = 0;
     for (let key in item) {
-        lineItems.push(<PWItemLine key={idx} label={key} value={item[key]} />);
+        lineItems.push(<PWItemLine key={idx} label={key} value={(item as any)[key]} />);
         idx++;
     }
     return lineItems;
@@ -66,10 +66,12 @@ function PWGroup(props: PWGroupProps) {
 }
 
 export default function HomePasswords() {
-    const passwordElements: React.JSX.Element[] = passwords.map((group: PWGroupProps, index: number) => <PWGroup {...group} key={index} />);
+    const passwordElements: React.JSX.Element[] = passwords.filter(group => group.group !== "Streaming services").map((group: PWGroupProps, index: number) => <PWGroup {...group} key={index} />);
     return (
-        <Card size="2">
-            <h2>Passwords</h2>
+        <Card
+            size="2"
+            heading="Passwords"
+        >
             <React.Fragment>
                 {passwordElements}
             </React.Fragment>

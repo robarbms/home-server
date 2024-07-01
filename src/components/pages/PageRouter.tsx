@@ -1,10 +1,11 @@
-import React, { useState, createContext } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState, createContext, useEffect, useContext } from 'react';
 import Home from './Home';
-import ServicesPage from './Services';
 import site_navigation from '../../data/navigation';
-import {loadSettings} from '../navigation/Settings';
 import Login from '../login/Login';
+import AI from './AI';
+import Events from './Events';
+import { SiteContext } from '../App';
+import Frame from './Frame';
 
 /**
  * Context used for tracking logged in state
@@ -18,23 +19,16 @@ export const LoginContext = createContext({
  * Routes to the home page if logged in, otherwise it shows the login screen
  */
 export default function PageRouter() {
-    const [loggedin, setLoggedin] = useState(false);
+    const settings = useContext(SiteContext);
+    const { page, setPage, frame } = settings.navigation;
 
-    const value = {
-        loggedin,
-        setLoggedin
-    }
 
-    return (loggedin ?
-        <Router>
-            <Routes>
-                <Route path="/">
-                    <Route index element={<Home navigation={site_navigation} />} />
-                </Route>
-            </Routes>
-        </Router> :
-        <LoginContext.Provider value={value}>
-            <Login />
-        </LoginContext.Provider>
-    )
+    return settings.user.loggedIn ?
+        <>
+            {page === "home" && <Home navigation={site_navigation} />}
+            {page === "ai" && <AI navigation={site_navigation} />}
+            {page === "events" && <Events navigation={site_navigation} />}
+            {page === "frame" && frame && <Frame url={frame as string} navigation={site_navigation} />}
+        </> :
+        <Login />
 } 

@@ -3,7 +3,11 @@ import {streaming} from '../../data/private';
 import Card from './Card';
 import '../../styles/streams.css';
 
-function Stream(props) {
+function Stream(props: {
+    service: string;
+    login: string;
+    password: string;
+}) {
     const {service, login, password} = props;
 
     return (
@@ -21,8 +25,10 @@ function Stream(props) {
 
 export default function Streaming() {
     return (
-        <Card size="2">
-            <h2>Streaming Services</h2>
+        <Card
+            size="2"
+            heading="Streaming Services"
+        >
             <div className="streams">
                 {streaming.map((serv, index) => <Stream key={index} {...serv} />)}
             </div>

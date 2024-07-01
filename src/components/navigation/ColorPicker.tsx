@@ -1,44 +1,68 @@
-import React, {useState, useEffect} from 'react';
-import {getCookie} from '../utils/cookies';
 
-export function setAccent(color) {
-    document.querySelector('body')?.style.setProperty('--accent', color);
-    document.cookie = `accent=${color}`;
+import React, { useState, useEffect, useContext } from 'react';
+import { getCookie } from '../utils/cookies';
+import { ColorPicker } from 'antd';
+import { Color } from 'antd/lib/color-picker/color';
+import { accentColor } from '../../data/settings';
+import { SiteContext } from '../App';
+
+// Sets the accent color as a CSS variable
+export function useSetAccent(color: string) {
+document.querySelector('body')?.style.setProperty('--accent', color);
+  document.cookie = `accent=${color}`;
 }
 
-function ColorOption(props) {
-    const {name, setColor} = props;
+// Properties for the ColorOption component
+type ColorOptionProps = {
+  name: string;
+  value: string;
+  setColor: (color: string) => void;
+};
 
-    return (
-        <div className="color_option" onClick={() => setColor(props.value)}>
-            <div className="swatch" style={{backgroundColor: props.value}}>
+/**
+ * Component that renders out a color option
+ * @param props
+ * @returns
+ */
+function ColorOption(props: ColorOptionProps) {
+  const { name, setColor } = props;
 
-            </div>
-            <label>{name}</label>
-        </div>
-    )
+  return (
+    <div className="color_option" onClick={() => setColor(props.value)}>
+      <div className="swatch" style={{ backgroundColor: props.value }}></div>
+      <label>{name}</label>
+    </div>
+  );
 }
 
-export default function ColorPicker(props) {
-    const [color, setColor] = useState();
+/**
+ * Renders the accent color options
+ * @param props
+ * @returns
+ */
+export default function SettingsColorPicker(props: {
+  accents: Array<accentColor>;
+}) {
+    const settings = useContext(SiteContext);
+    const { primaryColor, setPrimaryColor } = settings.theme;
 
-    useEffect(() => {
-        if (color) {
-            setAccent(color);
-        }
-    }, [color]);
+  const customChange = (color: Color) => {
+    setPrimaryColor(color.toHexString());
+  };
 
-    useEffect(() => {
-        const cookie = getCookie();
-        if (cookie.accent) {
-            setColor(cookie.accent);
-        }
-    }, []);
-
-    return (
-        <div className="color_picker">
-            <h3>Accent color</h3>
-            {props.accents.map((clr, index) => <ColorOption {...clr} key={index} setColor={setColor} />)}
-        </div>
-    )
+  return (
+    <div className="color_picker">
+      <h3>Accent color</h3>
+      {props.accents.map((clr: accentColor, index: number) => (
+        <ColorOption {...clr} key={index} setColor={setPrimaryColor} />
+      ))}
+      <div className="color_option">
+        <ColorPicker
+          className="color-picker"
+          onChangeComplete={customChange}
+          defaultValue="#F200FF"
+        /> Custom
+      </div>
+    </div>
+  );
 }

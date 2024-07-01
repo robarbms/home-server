@@ -1,23 +1,16 @@
-
-nav.navigation {
-    --nav-back: rgba(200, 200, 200, .5);
-    padding: var(--spacing) var(--spacing);
-    box-sizing: border-box;
-    height: 100%;
-    box-shadow: 0 0 5px rgba(0, 0, 0, .6);
-    background: var(--nav-back);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 1;
-    width: 120px;
-    transition: right ease-out .3s;
-    backdrop-filter: blur(4px);
+.settings-open {
+    cursor: pointer;
+    background: var(--accent);
+    height: 36px;
 }
 
-nav.navigation.nav_close {
-    right: -120px;
+.settings-open svg {
+    width: 30px;
+    margin: 2px 0 0;
+}
+
+.settings-open:hover svg {
+    text-shadow: 0 0 4px #fff;
 }
 
 .dark nav.navigation {
@@ -31,7 +24,7 @@ nav.navigation.nav_close {
 }
 
 .navigation a:hover,
-.color_option:hover {
+.color_option:hover {   
     background: rgba(0, 0, 0, .1);
 }
 
@@ -68,8 +61,6 @@ nav.navigation.nav_close {
     fill: currentColor;
 }
 
-.settings_close {
-}
 
 .nav_open .settings_open,
 .nav_close .settings_close {

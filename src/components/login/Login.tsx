@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { ThemeContext } from '../App';
+import React, { useEffect, useRef, useContext } from 'react';
+import { SiteContext } from '../App';
 import {logins} from '../../data/private';
 import '../../styles/login.css';
-import { LoginContext } from '../pages/PageRouter';
 
 /**
  * Simple login component
@@ -52,14 +51,15 @@ export default function Login() {
         const password = getPassword();
         if (validPW(password)) {
             document.cookie = `password=${password}`;
-            login.setLoggedin(validPW(password));
+            user.setLoggedIn(validPW(password));
         }
         else {
             clearPassword();
         }
     }
 
-    const login = useContext(LoginContext);
+    const settings = useContext(SiteContext);
+    const { user } = settings;
 
     /**
      * 
@@ -89,17 +89,15 @@ export default function Login() {
         if (userKeyValue) {
             const value = userKeyValue.split("=")[1];
             if (validPW(value)) {
-                login.setLoggedin(true);
+                user.setLoggedIn(true);
                 return;
             }
         }
         focusFirstCell();
     }, []);
 
-    const theme = useContext(ThemeContext);
-
     return (
-        <div className={`login ${theme.isDark ? 'dark' : ''}`}>
+        <div className={`login ${settings.theme.isDark ? 'dark' : ''}`}>
             <div className="login_area">
                 <input type="number" ref={cells[0]} onKeyUp={handleKeyUp(1)} />
                 <input type="number" ref={cells[1]} onKeyUp={handleKeyUp(2)} />

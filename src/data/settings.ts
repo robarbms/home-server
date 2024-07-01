@@ -1,3 +1,10 @@
+export type accentColor = {
+    name: string;
+    value: string;
+    contrast: string;
+    compliment: string;
+}
+
 export const settings = {
     accents: [
         {

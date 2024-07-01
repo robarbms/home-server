@@ -1,31 +1,21 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import { settings } from '../../data/settings';
-import SetDark from './SetDark';
 import ColorPicker from './ColorPicker';
 import '../../styles/settings.css';
-import {getCookie} from '../utils/cookies';
-
-export function loadSettings() {
-    const defaults: {
-        isDark: string,
-        accent: string
-    } = {
-        isDark: 'true',
-        accent: settings.accents[0].value
-    }
-
-    const cookies = getCookie();
-
-    const merged_settings = Object.assign({}, defaults, cookies);
-
-    return merged_settings;
-}
+import { Switch, Divider } from 'antd';
+import { SiteContext } from '../App';
 
 export default function Settings() {
+    const siteSettings = useContext(SiteContext);
+    const onChange = (checked: boolean) => {
+        siteSettings.theme.setIsDark(checked);
+    }
+
     return (
         <div className="settings nav-section">
-            <h2>Settings</h2>
-            <SetDark />
+            <h3>Dark mode</h3>
+            <Switch defaultChecked={siteSettings.theme.isDark} onChange={onChange} />
+            <Divider />
             <ColorPicker accents={settings.accents} />
         </div>
     )

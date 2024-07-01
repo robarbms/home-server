@@ -41,7 +41,7 @@ export default function DateTile() {
             day: now.getDate(),
             year: now.getFullYear()
         };
-        setDate(date_parse);
+        setDate(date_parse as any);
     }, []);
 
     return (

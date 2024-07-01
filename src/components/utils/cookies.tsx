@@ -2,7 +2,8 @@ import {valid_users} from '../../data/private';
 
 type CookieProperties = {
     isDark?: string,
-    password?: string
+    password?: string,
+    accent?: string
 }
 
 /**
@@ -13,8 +14,9 @@ export function getCookie(): CookieProperties {
     const cookies = document.cookie.split("; ");
     const keyValues = cookies.map((c: string) => c.split("="));
     const storedCookies: CookieProperties = {};
+    const keys = ["isDark", "password", "accent"];
     keyValues.map((c: string[]) => {
-        if (c[0] == "isDark" || c[0] == "password") storedCookies[c[0]] = c[1];
+        if (keys.find(key => key === c[0])) storedCookies[c[0] as "isDark" | "password" | "accent"] = c[1];
     });
 
     return storedCookies;

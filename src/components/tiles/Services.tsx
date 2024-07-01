@@ -2,7 +2,6 @@ import React from 'react';
 import Card from './Card';
 import {links, Link} from '../../data/services';
 import '../../styles/services.css';
-import {Link as RouterLink} from 'react-router-dom';
 import SeeAll from '../SeeAll';
 
 export function LabeledLink (props: {label: string, link: string}) {
@@ -41,9 +40,11 @@ export function Contact (props: Link) {
 
 export default function Services() {
     return (
-        <Card size="2">
+        <Card
+            size="2"
+            heading="Utilities and Services"
+        >
             <div className="services">
-                <h2><RouterLink to="services">Utilities and Services</RouterLink></h2>
                 <div className="serv_cont">
                     {links.map((link, index) => <Contact {...link} key={index} />)}
                 </div>

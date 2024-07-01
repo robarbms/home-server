@@ -1,16 +1,16 @@
 .time {
-    font-size: 4rem;
-    line-height: 4rem;
+    font-size: 6rem;
+    line-height: 6rem;
     font-family: 'Segoe UI Narrow', Arial, sans-serif;
+    font-weight: 100;
     text-align: center;
     margin: 0 0 var(--spacing);
     color: var(--accent);
-    height: 64px;
 }
 
 .date {
     text-align: center;
-    height: 63px;
+    font-size: 20px;
 }
 
 .date::after {
@@ -19,7 +19,7 @@
     height: 0;
     border-bottom: 1px solid;
     opacity: .5;
-    margin: var(--spacing) 0;
+    margin: 40px 0 20px;
 }
 
 .time-zone {
@@ -27,7 +27,8 @@
     margin: 0 0 var(--spacing);
     position: relative;
     display: inline-block;
-    min-width: calc(var(--block) / 2.2)
+    min-width: calc(var(--block) / 2.2 - 20px);
+    box-sizing: border-box;
 }
 
 .time-zone label {

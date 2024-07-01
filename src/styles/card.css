@@ -2,7 +2,6 @@
     --card-size: var(--block);
     border-radius: 6px;
     display: inline-block;
-    padding: var(--spacing);
     width: var(--card-size);
     height: var(--card-size);
     border: 1px solid rgba(0, 0, 0, .2);
@@ -11,6 +10,12 @@
     position: relative;
     box-sizing: border-box;
     background: rgba(0, 0, 0, .05);
+    display: grid;
+    grid-template-rows: 40px 1fr 40px;
+}
+
+.card-content {
+    padding: 0 var(--spacing) var(--spacing);
 }
 
 .card-2x {
@@ -18,8 +23,46 @@
 }
 
 .dark .card {
-    background: rgba(0, 0, 0, .1);
+    background: rgba(0, 0, 0, .5);
     border: none;
+}
+
+.card-heading {
+    padding: var(--spacing);
+}
+
+.card-heading h2 {
+    color: var(--accent);
+}
+
+.footer,
+.footer:link,
+.footer:visited {
+    text-align: right;
+    border-radius:  0 0 6px 6px;
+    padding:  var(--spacing); 
+    background: #bbb;
+    cursor: pointer;
+}
+
+.dark .footer,
+.dark .footer:link,
+.dark .footer:visited {
+    background: #1a1a1a;
+}
+
+.dark .footer:hover,
+.footer:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+.footer svg {
+    width: 16px;
+    display: inline-block;
+    margin: 0 0 0 10px;
+    vertical-align: text-bottom;
+    color: inherit;
 }
 
 @media screen and (max-width: 600px) {

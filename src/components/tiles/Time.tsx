@@ -85,7 +85,7 @@ export default function Time() {
         current: "",
         seattle: "America/Los_Angeles",
         boston: "America/New_York",
-        london: "Europe/London",
+        // london: "Europe/London",
         hawaii: "Pacific/Honolulu"
     }
 

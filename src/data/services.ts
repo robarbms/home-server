@@ -10,17 +10,6 @@ export type Link = {
 
 export const links: Link[] = [
     {
-        text: "Shorecrest High School",
-        link: "https://shorecrest.ssd412.org/",
-        phone: "206-393-4286",
-        links: [
-            {
-                text: "Calendar",
-                link: "https://shorecrest.ssd412.org/about-us/calendar"
-            }
-        ]
-    },
-    {
         text: "Puget Sound Electric (PSE)",
         link: "https://www.pse.com/",
         phone: "1-888-225-5773",

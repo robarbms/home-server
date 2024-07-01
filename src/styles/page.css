@@ -2,6 +2,8 @@
     min-height: 100vh;
     background: var(--main-bg-color);
     color: var(--font-color);
+    display: grid;
+    grid-template-rows: 36px 1fr;
 }
 
 .page-with-title .content-area {
@@ -20,6 +22,66 @@
     box-sizing: border-box;
     align-content: start;
     margin: 0 auto;
+    position: relative;
+}
+
+.full-content .content {
+    max-width: none;
+}
+
+/* header */
+.header {
+    background: #222;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+    color: #fff;
+    display: grid;
+    grid-template-columns: 1fr 60px;
+    height: 36px;
+    line-height: 36px;
+}
+
+.header-right {
+    text-align: right;
+}
+
+.header-right > div {
+    display: inline-block;
+}
+
+.header-link {
+    display: inline-block;
+}
+
+.header-link a,
+.header-link span {
+    padding: 10px 40px;
+    cursor: pointer;
+}
+
+.header-link svg {
+    display: inline-block;
+    width: 24px;
+    margin: 0 10px 5px 0;
+    vertical-align: middle;
+}
+
+.header-link a:hover,
+.header-link span:hover {
+    color: var(--accent);
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--accent);
+}
+
+.settings-open {
+    padding: 0 10px;
+}
+
+.frame {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
 }
 
 @media screen and (max-width: 686px) {
