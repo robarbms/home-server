@@ -13,7 +13,8 @@ export const events = [
     {
         text: "Cinebarre",
         link: "https://www.regmovies.com/theatres/regal-cinebarre-mountlake-1958",
-        hours: "844-462-7342",
+        phone: "844-462-7342",
+        hours: "11am-11:30pm"
     },
     {
         text: "Easy Monkey Taphouse",
