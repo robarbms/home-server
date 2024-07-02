@@ -43,6 +43,7 @@
     padding:  var(--spacing); 
     background: #bbb;
     cursor: pointer;
+    display: block;
 }
 
 .dark .footer,
@@ -80,5 +81,14 @@
     .card,
     div.card-2x {
         height: auto;
+    }
+
+    .cols2 {
+        display: block;
+    }
+
+    .cols2 > * + * {
+        border: none;
+        padding-left: 0;
     }
 }

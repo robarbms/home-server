@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
-import { HomeIcon, CloudIcon, CalendarIcon, KeyIcon, CpuChipIcon, TvIcon } from '@heroicons/react/24/outline';
+import React, { useContext, useState } from 'react';
+import { HomeIcon, CloudIcon, CalendarIcon, KeyIcon, CpuChipIcon, TvIcon, Bars3Icon } from '@heroicons/react/24/outline';
 import { SiteContext } from '../App';
+import { Drawer } from 'antd';
 
 type HeaderLinkProps = {
     title: string;
@@ -46,6 +47,7 @@ const Header = (props: HeaderProps) => {
     const { actions } = props;
     const settings = useContext(SiteContext);
     const { setPage, loadFrame } = settings.navigation;
+    const [ mobileMenuOpen, setMobileMenuOpen ] = useState(false);
 
     const links = [
         {
@@ -77,6 +79,10 @@ const Header = (props: HeaderProps) => {
     return (
         <div className="header">
             <div className="header-main">
+                <div className="mobile-menu-open" onClick={() => setMobileMenuOpen(true)}><Bars3Icon /></div>
+                <Drawer className="mobile-menu" title="Menu" onClose={() => setMobileMenuOpen(false)} open={mobileMenuOpen} placement="left">
+                    {links.map((link, idx) => <HeaderLink key={idx} {...link} loadFrame={loadFrame} />)}
+                </Drawer>
                 {links.map((link, idx) => <HeaderLink key={idx} {...link} loadFrame={loadFrame} />)}
             </div>
             <div className="header-right">

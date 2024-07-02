@@ -97,3 +97,29 @@ a.button {
     box-shadow: 0 0 6px var(--accent);
 }
 
+.mobile-menu-open {
+    display: none;
+    width: 24px;
+    padding: 6px;
+}
+
+.mobile-menu .header-link {
+    display: block;
+}
+
+.mobile-menu .header-link span,
+.mobile-menu .header-link a {
+    padding: 20px 0;
+    display: block;
+    font-size: 30px;
+}
+
+@media screen and (max-width: 600px) {
+    .mobile-menu-open {
+        display: block;
+    }
+
+    .header-main > .header-link {
+        display: none;
+    }
+}
