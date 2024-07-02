@@ -65,6 +65,17 @@
     color: inherit;
 }
 
+.cols2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.cols2 > * + * {
+    border-left: 1px solid;
+    padding-left: 10px;
+}
+
 @media screen and (max-width: 600px) {
     .card,
     div.card-2x {

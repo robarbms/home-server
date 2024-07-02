@@ -47,11 +47,6 @@ const Header = (props: HeaderProps) => {
             "icon": <HomeIcon />
         },
         {
-            "title": "NextCloud",
-            "link": "http://home:8080",
-            "icon": <CloudIcon />
-        },
-        {
             "title": "Events",
             "click": () => setPage("events"),
             "icon": <CalendarIcon />
@@ -65,7 +60,12 @@ const Header = (props: HeaderProps) => {
             "title": "Plex",
             "link": "http://home:32400/web/index.html",
             "icon": <TvIcon />
-        }
+        },
+        {
+            "title": "NextCloud",
+            "link": "http://home:8080",
+            "icon": <CloudIcon />
+        },
     ]
     return (
         <div className="header">
