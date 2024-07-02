@@ -8,10 +8,11 @@ type HeaderLinkProps = {
     link?: (() => void) | string;
     click?: () => void;
     loadFrame: (url: string) => void;
+    href?: string;
 }
 
 const HeaderLink = (props: HeaderLinkProps) => {
-    let {title, link, icon, click, loadFrame} = props;
+    let {title, link, icon, click, loadFrame, href} = props;
 
     return (
         <div className="header-link">
@@ -26,6 +27,12 @@ const HeaderLink = (props: HeaderLinkProps) => {
                     {icon && icon}
                     {title}
                 </span>
+            }
+            {href &&
+                <a href={href} target="_blank" title={title}>
+                    {icon && icon}
+                    {title}
+                </a>
             }
         </div>
     );
@@ -63,7 +70,7 @@ const Header = (props: HeaderProps) => {
         },
         {
             "title": "NextCloud",
-            "link": "http://home:8080",
+            "href": "http://home:8080",
             "icon": <CloudIcon />
         },
     ]
