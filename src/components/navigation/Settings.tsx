@@ -13,6 +13,7 @@ export default function Settings() {
 
     return (
         <div className="settings nav-section">
+            <h2>Site colors</h2>
             <h3>Dark mode</h3>
             <Switch defaultChecked={siteSettings.theme.isDark} onChange={onChange} />
             <Divider />

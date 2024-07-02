@@ -49,7 +49,7 @@
 .dark .footer,
 .dark .footer:link,
 .dark .footer:visited {
-    background: #1a1a1a;
+    background: inherit;
 }
 
 .dark .footer:hover,
