@@ -91,6 +91,8 @@ a.button {
     color: #fff;
     font-weight: bold;
     transition: all linear .3s;
+    min-width: 120px;
+    text-align: center;
 }
 
 .button:hover {
