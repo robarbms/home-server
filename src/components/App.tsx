@@ -138,10 +138,6 @@ export default function App (): React.ReactElement {
         fetchData(); // Fetch data when the component mounts
     }, []);
 
-    useEffect(() => {
-        console.log(eventData);
-    }, [eventData]);
-
     return (
         <SiteContext.Provider value={value as IContext}>
             <PageRouter />

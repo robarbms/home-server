@@ -15,15 +15,13 @@ const Location = (props: any) => {
     const today = new Date();
     const  tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1 );
-    console.log(props);
+
     const trucksToday = props.trucks.filter((truck: any) => {
         return truck.date.day == today.getDate();
     });
     const trucksTomorrow = props.trucks.filter((truck: any) => { 
         return truck.date.day == tomorrow.getDate();
     });
-
-    console.log({trucksToday, trucksTomorrow});
 
     return (
         <div className="food-location">

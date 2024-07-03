@@ -5,7 +5,6 @@ import Calendar from '../tiles/events/Calendar';
 import Services from '../tiles/Services';
 import Streaming from '../tiles/Streaming';
 import HomePasswords from '../tiles/HomePasswords';
-import AI from '../tiles/AI';
 
 
 export default function Home(props: PageProps) {
@@ -13,7 +12,6 @@ export default function Home(props: PageProps) {
         <Page navigation={props.navigation}>
             <Time />
             <Calendar />
-            <AI />
             <Streaming />
             <HomePasswords />
             <Services />
