@@ -125,6 +125,8 @@ export default function App (): React.ReactElement {
         });
         const data = await response.json();
         setEventData(data);
+
+        setPrimaryColor(primaryColor);
     }, [])
 
 
