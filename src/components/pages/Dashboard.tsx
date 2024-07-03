@@ -6,6 +6,7 @@ import Movie from '../tiles/events/Movie';
 import { SiteContext } from '../App';
 import FoodTrucks from '../tiles/events/FoodTrucks';
 import AI from '../tiles/AI';
+import Birthdays from '../tiles/events/Birthdays';
 
 
 export default function Dashboard(props: PageProps) {
@@ -21,9 +22,10 @@ export default function Dashboard(props: PageProps) {
         <Page navigation={props.navigation}>
             <Time />
             <Calendar />
-            <AI />
-            <FoodTrucks />
+            <Birthdays />
             {cinebarre && <Movie {...cinebarre} />}
+            <FoodTrucks />
+            <AI />
         </Page>
     );
 }
