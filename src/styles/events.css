@@ -1,0 +1,37 @@
+.food-location + .food-location {
+    margin-top: 20px;
+}
+
+.event-movie-time,
+.truck {
+    display: inline-block;
+    background: #aaa;
+    padding: 3px 5px;
+    margin: 0 10px 10px 0;
+    color: #fff;
+    border-radius: 2px;
+}
+
+.dark .event-movie-time,
+.dark .truck {
+    background: #666;
+}
+
+.event-movies {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 300px;
+    gap: 5px;
+}
+
+.event-movie {
+    display: inline-block;
+}
+
+
+@media screen and (max-width: 600px) {
+    .event-movies {
+        height: auto;
+    }
+}

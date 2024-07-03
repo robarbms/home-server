@@ -1,7 +1,7 @@
 
 export type Link = {
     text: string,
-    link: string,
+    link?: string,
     phone?: string,
     email?: string,
     hours?: string,
@@ -51,4 +51,20 @@ export const links: Link[] = [
             }
         ]
     },
+    {
+        text: "City Hall",
+        link: "https://www.cityoflfp.gov",
+        phone: "206-368-5440",
+        email: "",
+        hours: "Mon-Fri, 9am-5pm"
+    },
+    {
+        text: "Municipal Court",
+        phone: "206-364-7711",
+        hours: "Mon-Fri, 9am-5pm",
+    },
+    {
+        text: "Police",
+        phone: "425-577-5656"
+    }
 ];

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { HomeIcon, CloudIcon, CalendarIcon, KeyIcon, CpuChipIcon, TvIcon, Bars3Icon } from '@heroicons/react/24/outline';
+import { HomeIcon, CloudIcon, CalendarIcon, KeyIcon, CpuChipIcon, TvIcon, Bars3Icon, CodeBracketIcon, ChartPieIcon } from '@heroicons/react/24/outline';
 import { SiteContext } from '../App';
 import { Drawer } from 'antd';
 
@@ -51,6 +51,11 @@ const Header = (props: HeaderProps) => {
 
     const links = [
         {
+            "title": "Dashboard",
+            "click": () => setPage("dashboard"),
+            "icon": <ChartPieIcon />
+        },
+        {
             "title": "Home",
             "click": () => setPage("home"),
             "icon": <HomeIcon />
@@ -63,7 +68,7 @@ const Header = (props: HeaderProps) => {
         {
             "title": "AI",
             "click": () => setPage("ai"),
-            "icon": <CpuChipIcon />
+            "icon": <CodeBracketIcon />
         },
         {
             "title": "Plex",

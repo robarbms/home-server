@@ -18,8 +18,13 @@
     padding: 0 var(--spacing) var(--spacing);
 }
 
-.card-2x {
+.card-2 {
     width: calc(var(--card-size) * 2 + var(--spacing)); 
+}
+
+.card-2x2 {
+    width: calc(var(--card-size) * 2 + var(--spacing)); 
+    height: calc(var(--card-size) * 2 + var(--spacing)); 
 }
 
 .dark .card {

@@ -6,6 +6,7 @@ import AI from './AI';
 import Events from './Events';
 import { SiteContext } from '../App';
 import Frame from './Frame';
+import Dashboard from './Dashboard';
 
 /**
  * Context used for tracking logged in state
@@ -25,6 +26,7 @@ export default function PageRouter() {
 
     return settings.user.loggedIn ?
         <>
+            {page === "dashboard" && <Dashboard navigation={site_navigation} />} 
             {page === "home" && <Home navigation={site_navigation} />}
             {page === "ai" && <AI navigation={site_navigation} />}
             {page === "events" && <Events navigation={site_navigation} />}

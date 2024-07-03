@@ -1,9 +1,9 @@
-import React, {createContext, useEffect, useState, MouseEventHandler} from 'react';
+import React, {createContext, useEffect, useState, MouseEventHandler , useCallback} from 'react';
 import '../styles/site.css';
 import PageRouter from './pages/PageRouter';
 import { getCookie } from './utils/cookies';
 
-export type PageRoute = "home" | "ai" | "frame" | "events";
+export type PageRoute = "dashboard" | "home" | "ai" | "frame" | "events";
 
 interface IContext {
     user: {
@@ -24,6 +24,10 @@ interface IContext {
         loadFrame: (url: string) => void;
         frame: null | string;
         setFrame: React.Dispatch<React.SetStateAction<null | string>>;
+    },
+    events: {
+        eventData: any;
+        setEventData: React.Dispatch<React.SetStateAction<any>>;
     }
 }
 
@@ -51,6 +55,10 @@ export const SiteContext = createContext<IContext>({
         frame: null,
         setFrame: ((url: string) => {}) as React.Dispatch<React.SetStateAction<null | string>>,
     },
+    events: {
+        eventData: null,
+        setEventData: ((value: any) => {}) as React.Dispatch<React.SetStateAction<any>>,
+    }
 });
 
 
@@ -61,10 +69,11 @@ export const SiteContext = createContext<IContext>({
 export default function App (): React.ReactElement {
     const [ primaryColor, _setPrimaryColor ] = useState<string>('#2499FF');
     const [isDark, _setIsDark] = useState<boolean>(false);
-    const [ page, setPage] = useState<PageRoute>("home");
+    const [ page, setPage] = useState<PageRoute>("dashboard");
     const [ loggedIn, setLoggedIn ] = useState<boolean>(false);
     const [ userName, setUserName] = useState<string>("");
     const [ frame, setFrame ] = useState<string | null>(null);
+    const [ eventData, setEventData ] = useState<any>();
 
     const setIsDark: React.Dispatch<React.SetStateAction<boolean>> = ((value: boolean) => {
         document.cookie = `isDark=${value ? 'true' : 'false'}`;
@@ -100,8 +109,23 @@ export default function App (): React.ReactElement {
             },
             frame,
             setFrame
+        },
+        events: {
+            eventData,
+            setEventData
         }
     };
+
+    const fetchData = useCallback(async () => {
+        const response = await fetch('/events.json', {
+            headers: {
+                "Content-Type": "application/json",
+                 "Accept": "application/json"
+            }
+        });
+        const data = await response.json();
+        setEventData(data);
+    }, [])
 
 
     useEffect(() => {
@@ -111,7 +135,12 @@ export default function App (): React.ReactElement {
             document.querySelector('body')?.style.setProperty('--accent', cookies.accent as any);
             _setPrimaryColor(cookies.accent as any);
         }
+        fetchData(); // Fetch data when the component mounts
     }, []);
+
+    useEffect(() => {
+        console.log(eventData);
+    }, [eventData]);
 
     return (
         <SiteContext.Provider value={value as IContext}>

@@ -27,7 +27,7 @@ type CardProperties = {
 export default function Card(props: CardProperties): React.ReactElement {
     const { heading, children, size, addClass, footer } = props;
     let cn: string = `card`;
-    if (size) cn += ` card-${size}x`
+    if (size) cn += ` card-${size}`
     if (addClass) cn += ` ${addClass}`;
     const settings = useContext(SiteContext);
     const { loadFrame } = settings.navigation;
