@@ -23,7 +23,7 @@ function ContactDetails (props: Link) {
 
 type ServiceTileProps = {
     text: string,
-    link: string,
+    link?: string,
     phone?: string,
     email?: string,
     hours?: string,
