@@ -12,6 +12,10 @@
     border-radius: 2px;
 }
 
+.truck {
+    margin-left: 10px;
+}
+
 .dark .event-movie-time,
 .dark .truck {
     background: #666;
