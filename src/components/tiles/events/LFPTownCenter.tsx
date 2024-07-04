@@ -38,7 +38,7 @@ export default function LFPTownCenter() {
             } : {}}
         >
             <>
-                <div className="cols2-flex" style={{"height": "225px"}}>
+                <div className="cols2-flex">
                     {!!lfpEvents && lfpEvents.events.slice(0, 6).map((event: any, index: number) => <LFPEvent key={index} {...event} />)}
                 </div>
             </>
