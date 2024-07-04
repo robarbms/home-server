@@ -9,7 +9,7 @@ const LFPEvent = (props: any) => {
 
         return (
         <div className="event">
-            <h4 style={{"marginTop": "5px"}}>{props.title}</h4>
+            <h4 style={{"marginTop": "10px"}}>{props.title}</h4>
             <div>{props.location}</div>
             <div>{months[props.date.month - 1]} {props.date.day}, {props.start_time} - {props.end_time}</div>
         </div>
