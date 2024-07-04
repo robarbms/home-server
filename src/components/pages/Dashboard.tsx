@@ -7,6 +7,7 @@ import { SiteContext } from '../App';
 import FoodTrucks from '../tiles/events/FoodTrucks';
 import AI from '../tiles/AI';
 import Birthdays from '../tiles/events/Birthdays';
+import LFPTownCenter from '../tiles/events/LFPTownCenter';
 
 
 export default function Dashboard(props: PageProps) {
@@ -26,6 +27,7 @@ export default function Dashboard(props: PageProps) {
             {cinebarre && <Movie {...cinebarre} />}
             <FoodTrucks />
             <AI />
+            <LFPTownCenter />
         </Page>
     );
 }

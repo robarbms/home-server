@@ -7,7 +7,7 @@ export default function Events() {
     return (
         <Card
             size="2"
-            heading="Local Event Spaces"
+            heading="Local Event Info"
         >
             {evts.map((evt, index) => <Contact {...evt} key={index} />)}
         </Card>

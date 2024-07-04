@@ -82,6 +82,17 @@
     padding-left: 10px;
 }
 
+.cols2-flex {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    flex-wrap: wrap;
+}
+
+.cols2-flex > * {
+    display: inline-block;
+}
+
 @media screen and (max-width: 600px) {
     .card,
     div.card-2x {
@@ -95,5 +106,9 @@
     .cols2 > * + * {
         border: none;
         padding-left: 0;
+    }
+
+    .cols2-flex {
+        height: auto;
     }
 }

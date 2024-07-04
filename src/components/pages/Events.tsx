@@ -6,7 +6,8 @@ import Birthdays from '../tiles/events/Birthdays';
 import EventsTile from '../tiles/events/Events';
 import FoodTrucks from '../tiles/events/FoodTrucks';
 import Movie from  '../tiles/events/Movie';
-import  { SiteContext } from '../App';
+import { SiteContext } from '../App';
+import LFPTownCenter from '../tiles/events/LFPTownCenter';
 
 
 export default function Events(props: PageProps) {
@@ -23,9 +24,10 @@ export default function Events(props: PageProps) {
             <Time />
             <Calendar />
             <Birthdays />
-            <EventsTile />
             {cinebarre && <Movie {...cinebarre} />}
+            <LFPTownCenter />
             <FoodTrucks />
+            <EventsTile />
         </Page>
     );
 }

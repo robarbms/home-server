@@ -12,7 +12,7 @@ export type CardLink = {
 }
 
 const FooterLink = ({text, link, click, target, title, loadFrame}: CardLink & {loadFrame: Function}) => (
-    link ? <a className="footer" onClick={() => loadFrame(link)} title={title || text}>{text}  <ChevronDoubleRightIcon /></a> :
+    link ? <a className="footer" target={target} onClick={() => loadFrame(link)} title={title || text}>{text}  <ChevronDoubleRightIcon /></a> :
     <a className="footer" onClick={click as any} title={title || text}>{text}  <ChevronDoubleRightIcon /></a>
 );
 
