@@ -8,6 +8,7 @@ import FoodTrucks from '../tiles/events/FoodTrucks';
 import AI from '../tiles/AI';
 import Birthdays from '../tiles/events/Birthdays';
 import LFPTownCenter from '../tiles/events/LFPTownCenter';
+import Movies from '../tiles/events/Movies';
 
 
 export default function Dashboard(props: PageProps) {
@@ -24,7 +25,7 @@ export default function Dashboard(props: PageProps) {
             <Time />
             <Calendar />
             <Birthdays />
-            {cinebarre && <Movie {...cinebarre} />}
+            <Movies />
             <FoodTrucks />
             <AI />
             <LFPTownCenter />

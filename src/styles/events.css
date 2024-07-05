@@ -2,8 +2,11 @@
     margin-top: 20px;
 }
 
-.event-movie-time,
-.truck {
+.food-location h2 {
+    margin-bottom: 0;
+}
+
+.event-movie-time {
     display: inline-block;
     background: #aaa;
     padding: 3px 5px;
@@ -16,8 +19,7 @@
     margin-left: 10px;
 }
 
-.dark .event-movie-time,
-.dark .truck {
+.dark .event-movie-time {
     background: #666;
 }
 
@@ -25,17 +27,59 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    height: 300px;
+    height: 280px;
     gap: 5px;
+}
+
+.cols2 .event-movies {
+    height: auto;
 }
 
 .event-movie {
     display: inline-block;
+    max-width: 400px;
 }
 
+.truck-table {
+    width: 100%;
+}
+
+.truck-table td {
+    vertical-align: top;
+    font-size: 10px;
+}
+
+.truck-table th {
+    background: #ccc;
+}
+
+.dark .truck-table th {
+    background: #1a1a1a;
+}
+
+.foodtruck-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px 20px;
+}
+
+.foodtruck-week .truck {
+    margin: 0;
+}
+
+.day-truck {
+    display: inline-block;
+    font-size: 10px;
+    line-height: 14px;
+}
 
 @media screen and (max-width: 600px) {
     .event-movies {
         height: auto;
+    }
+
+    
+    .foodtruck-week {
+        grid-template-columns: repeat(4, 1fr);
     }
 }

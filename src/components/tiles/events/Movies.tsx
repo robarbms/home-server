@@ -14,8 +14,8 @@ const MovieTime = (props: any) => {
 const Movie = (props: any) => {
     return (
         <div className="event-movie">
-            <h3>{props.title}</h3>
-            {props.times && props.times.length > 0 && props.times.map((time: any, idx: number) => <MovieTime key={idx} time={time} />)}
+            <strong>{props.title}</strong>
+            {false && props.times && props.times.length > 0 && props.times.map((time: any, idx: number) => <MovieTime key={idx} time={time} />)}
         </div>
     )
 }
@@ -33,17 +33,21 @@ const Theater = (props: any) => {
 }
 
 export default function Movies() {
-    const { events } = useContext(SiteContext);
-
-    console.log({events});
+    const { events, navigation } = useContext(SiteContext);
 
     return (
         <Card
             size="2"
             heading="Movies"
+            footer={{
+                text: "See movie times",
+                click: () => navigation.setPage("events")
+            }}
         >
             <>
-                {events && 'eventData' in events && !!events.eventData && 'movies' in events.eventData && events.eventData.movies.length > 0 && events.eventData.movies.map((data: any, idx: number) => <Theater key={idx} {...data} />)}
+                <div className="cols2" style={{"height": "220px"}}>
+                    {events && 'eventData' in events && !!events.eventData && 'movies' in events.eventData && events.eventData.movies.length > 0 && events.eventData.movies.map((data: any, idx: number) => <Theater key={idx} {...data} />)}
+                </div>
             </>
         </Card>
     )

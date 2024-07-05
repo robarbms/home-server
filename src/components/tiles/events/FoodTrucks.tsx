@@ -4,9 +4,11 @@ import '../../../styles/events.css';
 import { SiteContext } from '../../App';
 
 const Truck = (props: any) => {
+    const cleanTime = (time: string) => time.toLowerCase().replace(/:00 ?/, '').replace(/^0/, '');
+
     return (
         <div className="truck">
-            {props.title}
+            <strong>{props.title}</strong> {cleanTime(props.start_time)} - {cleanTime(props.end_time)}
         </div>
     )
 }
@@ -27,7 +29,7 @@ const Location = (props: any) => {
         <div className="food-location">
             <h2>{props.name}</h2>
             <div>
-                <strong>Today:</strong>
+                <label>Today:</label>
                 {trucksToday.length > 0 &&
                     trucksToday.map((truck: any, index: number) => <Truck key={index} {...truck} />)
                 }
@@ -36,7 +38,7 @@ const Location = (props: any) => {
                 }
             </div>
             <div>
-                <strong>Tomorrow:</strong>
+                <label>Tomorrow:</label>
                 {trucksTomorrow.length > 0 &&
                     trucksTomorrow.map((truck: any, index: number) => <Truck key={index} {...truck} />)
                 }
@@ -49,7 +51,7 @@ const Location = (props: any) => {
 }
 
 export default function FoodTrucks(props: any) {
-    const { events } = useContext(SiteContext);
+    const { events, navigation } = useContext(SiteContext);
     const [ locations, setLocations ] = useState([]);
 
     if (events && events.eventData && 'food' in events.eventData && locations.length === 0) {
@@ -59,6 +61,10 @@ export default function FoodTrucks(props: any) {
     return (
         <Card
             heading="Food Trucks"
+            footer={{
+                text: "See weekly schedule",
+                click: () => navigation.setPage('events')
+            }}
         >
             <>
                 <div className="food-trucks">
