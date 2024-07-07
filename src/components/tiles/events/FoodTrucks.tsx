@@ -8,7 +8,7 @@ const Truck = (props: any) => {
 
     return (
         <div className="truck">
-            <strong>{props.title}</strong> {cleanTime(props.start_time)} - {cleanTime(props.end_time)}
+            <span className="truck-name">{props.title}</span> {cleanTime(props.start_time)} - {cleanTime(props.end_time)}
         </div>
     )
 }

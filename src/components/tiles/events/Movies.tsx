@@ -14,7 +14,7 @@ const MovieTime = (props: any) => {
 const Movie = (props: any) => {
     return (
         <div className="event-movie">
-            <strong>{props.title}</strong>
+            <span className="event-movie-title">{props.title}</span>
             {false && props.times && props.times.length > 0 && props.times.map((time: any, idx: number) => <MovieTime key={idx} time={time} />)}
         </div>
     )
@@ -45,7 +45,7 @@ export default function Movies() {
             }}
         >
             <>
-                <div className="cols2" style={{"height": "220px"}}>
+                <div className="cols2">
                     {events && 'eventData' in events && !!events.eventData && 'movies' in events.eventData && events.eventData.movies.length > 0 && events.eventData.movies.map((data: any, idx: number) => <Theater key={idx} {...data} />)}
                 </div>
             </>

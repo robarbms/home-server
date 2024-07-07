@@ -1,9 +1,18 @@
 .food-location + .food-location {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .food-location h2 {
     margin-bottom: 0;
+}
+
+.food-location {
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.food-location label {
+    font-weight: 600;
 }
 
 .event-movie-time {
@@ -37,7 +46,7 @@
 
 .event-movie {
     display: inline-block;
-    max-width: 400px;
+    max-width: 300px;
 }
 
 .truck-table {
