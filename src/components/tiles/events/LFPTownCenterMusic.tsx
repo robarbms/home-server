@@ -27,8 +27,6 @@ export default function LFPTownCenterMusic() {
         setLfpEvents(lfptc);
     }
 
-    if (lfpEvents) console.log(lfpEvents.music)
-
     return (
         <Card
             size="2"

@@ -7,9 +7,8 @@ import { SiteContext } from '../App';
 import FoodTrucks from '../tiles/events/FoodTrucks';
 import AI from '../tiles/AI';
 import Birthdays from '../tiles/events/Birthdays';
-import LFPTownCenter from '../tiles/events/LFPTownCenter';
 import Movies from '../tiles/events/Movies';
-import LFPTownCenterMusic from '../tiles/events/LFPTownCenterMusic';
+import TownCenter from '../tiles/TownCenter';
 
 
 export default function Dashboard(props: PageProps) {
@@ -27,10 +26,9 @@ export default function Dashboard(props: PageProps) {
             <Calendar />
             <Birthdays />
             <Movies />
+            <TownCenter />
             <FoodTrucks />
             <AI />
-            <LFPTownCenter />
-            <LFPTownCenterMusic />
         </Page>
     );
 }
