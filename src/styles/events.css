@@ -82,6 +82,10 @@
     line-height: 14px;
 }
 
+.band h4 {
+    margin-top: 10px;
+}
+
 @media screen and (max-width: 600px) {
     .event-movies {
         height: auto;

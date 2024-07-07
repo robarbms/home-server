@@ -9,6 +9,7 @@ import AI from '../tiles/AI';
 import Birthdays from '../tiles/events/Birthdays';
 import LFPTownCenter from '../tiles/events/LFPTownCenter';
 import Movies from '../tiles/events/Movies';
+import LFPTownCenterMusic from '../tiles/events/LFPTownCenterMusic';
 
 
 export default function Dashboard(props: PageProps) {
@@ -29,6 +30,7 @@ export default function Dashboard(props: PageProps) {
             <FoodTrucks />
             <AI />
             <LFPTownCenter />
+            <LFPTownCenterMusic />
         </Page>
     );
 }
