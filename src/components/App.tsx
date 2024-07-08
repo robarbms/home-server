@@ -155,13 +155,20 @@ export default function App (): React.ReactElement {
     }, []);
 
     useEffect(() => {
-        console.log(backgroundImage);
         switch(backgroundImage){
             case 'random':
                 (async () => {
-                    const images = await getPhotos(photoQuery);
-                    console.log(images);
-                    setBackgroundImage(images[Math.floor(Math.random() * images.length)].urls.regular);
+                    getPhotos(photoQuery).then((images)=>{
+                        setBackgroundImage(images[Math.floor(Math.random() * images.length)].urls.regular);
+                    })
+                    .catch((err)=>{
+                        const { innerHeight: height, innerWidth: width } = window;
+                        const aspect = width / height;
+                        const image = aspect > 1.2 ? "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1746&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" :
+                            aspect < .8 ? "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" :
+                            "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        setBackgroundImage(image);
+                    });
                 })();
                 break;
         }
