@@ -30,6 +30,10 @@ export default function Page(props: PageProps) : React.ReactElement {
 
     return (
         <div className={`page${settings.theme.isDark ? ' dark' : ''} ${props.full ? 'full-content' : ''} ${props.title ? 'page-with-title' : ''}`}>
+            {settings.theme.backgroundImage && settings.theme.backgroundImage !== null &&
+                <img className="background-image" src={settings.theme.backgroundImage} alt="" />
+            }
+            <div className="background-overlay"></div>
             <Header actions={actions} />
             <Navigation settingsOpen={settingsOpen} setSettingsOpen={setSettingsOpen} navigation={props.navigation} />
             <div className="content-area">

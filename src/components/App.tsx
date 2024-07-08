@@ -2,6 +2,7 @@ import React, {createContext, useEffect, useState, MouseEventHandler , useCallba
 import '../styles/site.css';
 import PageRouter from './pages/PageRouter';
 import { getCookie } from './utils/cookies';
+import getPhotos from './utils/getPhotos';
 
 export type PageRoute = "dashboard" | "home" | "ai" | "frame" | "events";
 
@@ -17,6 +18,10 @@ interface IContext {
         setIsDark: React.Dispatch<React.SetStateAction<boolean>>;
         primaryColor: string;
         setPrimaryColor: React.Dispatch<React.SetStateAction<string>>;
+        backgroundImage: null | "random" | string;
+        setBackgroundImage: React.Dispatch<React.SetStateAction<null | "random" | string>>;
+        photoQuery: string;
+        setPhotoQuery: React.Dispatch<React.SetStateAction<string>>;
     },
     navigation: {
         page: PageRoute;
@@ -46,7 +51,11 @@ export const SiteContext = createContext<IContext>({
         isDark: false,
         setIsDark: ((value: boolean) => {}) as React.Dispatch<React.SetStateAction<boolean>>,
         primaryColor: "#2499FF",
-        setPrimaryColor: ((value: string) => {}) as React.Dispatch<React.SetStateAction<string>>
+        setPrimaryColor: ((value: string) => {}) as React.Dispatch<React.SetStateAction<string>>,
+        backgroundImage: 'random',
+        setBackgroundImage: ((value: null | "random" | string) => {}) as React.Dispatch<React.SetStateAction<null | "random" | string>>,
+        photoQuery: "Paris",
+        setPhotoQuery: ((value: string) => {}) as React.Dispatch<React.SetStateAction<string>>,
     },
     navigation: {
         page: "home",
@@ -74,6 +83,8 @@ export default function App (): React.ReactElement {
     const [ userName, setUserName] = useState<string>("");
     const [ frame, setFrame ] = useState<string | null>(null);
     const [ eventData, setEventData ] = useState<any>();
+    const [ backgroundImage, setBackgroundImage ] = useState<null | "random" | string>('random');
+    const [ photoQuery, setPhotoQuery ] = useState<string>("Paris");
 
     const setIsDark: React.Dispatch<React.SetStateAction<boolean>> = ((value: boolean) => {
         document.cookie = `isDark=${value ? 'true' : 'false'}`;
@@ -99,6 +110,10 @@ export default function App (): React.ReactElement {
             setIsDark,
             primaryColor,
             setPrimaryColor,
+            backgroundImage,
+            setBackgroundImage,
+            photoQuery,
+            setPhotoQuery
         },
         navigation: {
             page,
@@ -127,8 +142,7 @@ export default function App (): React.ReactElement {
         setEventData(data);
 
         setPrimaryColor(primaryColor);
-    }, [])
-
+    }, []);
 
     useEffect(() => {
         const cookies = getCookie();
@@ -139,6 +153,20 @@ export default function App (): React.ReactElement {
         }
         fetchData(); // Fetch data when the component mounts
     }, []);
+
+    useEffect(() => {
+        console.log(backgroundImage);
+        switch(backgroundImage){
+            case 'random':
+                (async () => {
+                    const images = await getPhotos(photoQuery);
+                    console.log(images);
+                    setBackgroundImage(images[Math.floor(Math.random() * images.length)].urls.regular);
+                })();
+                break;
+        }
+
+    }, [backgroundImage])
 
     return (
         <SiteContext.Provider value={value as IContext}>

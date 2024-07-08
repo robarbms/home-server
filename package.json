@@ -41,7 +41,7 @@
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^6.8.1",
     "css-minimizer-webpack-plugin": "^5.0.1",
-    "dotenv-webpack": "^8.0.1",
+    "dotenv-webpack": "^8.1.0",
     "eslint": "^8.55.0",
     "eslint-config-standard-with-typescript": "^40.0.0",
     "eslint-plugin-import": "^2.29.0",
@@ -76,6 +76,10 @@
     "@heroicons/react": "^2.1.4",
     "@react-oauth/google": "^0.12.1",
     "antd": "^5.18.3",
-    "react-calendar": "^4.8.0"
+    "dotenv": "^16.4.5",
+    "fs": "^0.0.1-security",
+    "node-fetch": "^3.3.2",
+    "react-calendar": "^4.8.0",
+    "unsplash-js": "^7.0.19"
   }
 }

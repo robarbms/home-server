@@ -21,3 +21,11 @@
 .settings-drawer .ant-drawer-header {
     background: #d1d1d1;
 }
+
+.settings-image-picker {
+    margin: var(--spacing) 0;
+}
+
+.ant-divider {
+    background: rgba(0, 0, 0, .3);
+}

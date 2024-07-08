@@ -12,6 +12,8 @@
     background: rgba(0, 0, 0, .05);
     display: grid;
     grid-template-rows: 40px 1fr 40px;
+    background: rgba(255, 255, 255, .5);
+    backdrop-filter: blur(8px);
 }
 
 .card-content {
