@@ -4,10 +4,12 @@ import { SiteContext } from '../../App';
 import '../../../styles/events.css';
 
 const MovieTime = (props: any) => {
+    const time = props.time.replace(/:00/, '');
+
     return (
-        <div className="event-movie-time">
-            {props.time}
-        </div>
+        <span className="event-movie-time-min">
+            {time}
+        </span>
     )
 }
 
@@ -15,7 +17,7 @@ const Movie = (props: any) => {
     return (
         <div className="event-movie">
             <span className="event-movie-title">{props.title}</span>
-            {false && props.times && props.times.length > 0 && props.times.map((time: any, idx: number) => <MovieTime key={idx} time={time} />)}
+            {false && props.times && props.times.length > 0 && props.times.map((time: any, idx: number) => time.replace(/:00/, '')).join(', ')}
         </div>
     )
 }

@@ -6,12 +6,14 @@ import '../../styles/events.css';
 const LFPEvent = (props: any) => {
     const months = [ "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"];
+    const now = new Date();
+    const isToday = props.date.year == now.getFullYear() && props.date.month === (now.getMonth() + 1) && parseInt(props.date.day) == now.getDate();
 
         return (
-        <div className="event">
-            <h4 style={{"marginTop": "10px"}}>{props.title}</h4>
+        <div className={`event ${isToday ? "today" : ""}`}>
+            <h4>{props.title}</h4>
             <div>{props.location}</div>
-            <div>{months[props.date.month - 1]} {props.date.day}, {props.start_time} - {props.end_time}</div>
+            <div className="event-date">{months[props.date.month - 1]} {props.date.day}, {props.start_time} - {props.end_time}</div>
         </div>
     )
 }
@@ -19,12 +21,15 @@ const LFPEvent = (props: any) => {
 const LFPBand = (props: any) => {
     const months = [ "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"];
+    const title = props.title.replace(/ \- [^\-]*$/, "");
+    const now = new Date();
+    const isToday = props.date.year == now.getFullYear() && props.date.month === (now.getMonth() + 1) && parseInt(props.date.day) == now.getDate();
 
         return (
-        <div className="band">
-            <h4>{props.title}</h4>
+        <div className={`band ${isToday ? "today" : ""}`}>
+            <h4>{title}</h4>
             <div>{props.genre}</div>
-            <div>{months[props.date.month - 1]} {props.date.day}, {props.start_time} - {props.end_time}</div>
+            <div className="event-date">{months[props.date.month - 1]} {props.date.day}, {props.start_time} - {props.end_time}</div>
         </div>
     )
 }
@@ -53,7 +58,7 @@ export default function TownCenter() {
             <>
                 <div className="cols2-flex">
                     {!!lfpEvents && lfpEvents.events.slice(0, 4).map((event: any, index: number) => <LFPEvent key={index} {...event} />)}
-                    {!!lfpEvents && lfpEvents.music.slice(0, 2).map((event: any, index: number) => <LFPEvent key={index} {...event} />)}
+                    {!!lfpEvents && lfpEvents.music.slice(0, 2).map((event: any, index: number) => <LFPBand key={index} {...event} />)}
                 </div>
             </>
         </Card>

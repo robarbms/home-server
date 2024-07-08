@@ -6,10 +6,11 @@ import '../../../styles/events.css';
 const LFPBand = (props: any) => {
     const months = [ "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"];
+    const title = props.title.replace(/ \- [^\-]*$/, "");
 
         return (
         <div className="band">
-            <h4>{props.title}</h4>
+            <h4>{title}</h4>
             <div>{props.genre}</div>
             <div>{months[props.date.month - 1]} {props.date.day}, {props.start_time} - {props.end_time}</div>
         </div>

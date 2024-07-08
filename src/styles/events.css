@@ -82,8 +82,13 @@
     line-height: 14px;
 }
 
-.band h4 {
+.band h4,
+.event h4 {
     margin-top: 10px;
+}
+
+.today .event-date {
+    color: var(--accent);
 }
 
 @media screen and (max-width: 600px) {
