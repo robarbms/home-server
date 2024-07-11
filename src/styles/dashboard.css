@@ -20,8 +20,6 @@
 }
 
 .dashboard-middle {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
     background: rgba(255, 255, 255, .5);
     backdrop-filter: blur(6px);
     padding: 40px;
@@ -84,22 +82,20 @@ div + h2 {
     margin-top: 40px;
 }
 
-@media screen and (max-width: 900px) {
-    .dashboard section {
-        width: auto;
-    }
-}
-
 @media screen and (max-width: 680px) {
     .dashboard-time {
         width: 100%;
     }
 
-    .dashboard-content {
-        grid-template-rows: 40vh 1fr 2fr;
+    .dashboard-upper {
+        height: 50vh;
     }
 
     .dashboard-middle {
         display: block;
+    }
+
+    .dashboard section {
+        width: auto;
     }
 }
