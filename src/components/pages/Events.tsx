@@ -2,7 +2,6 @@ import React, {useContext, useState } from 'react';
 import Page, { PageProps } from './Page';
 import Time from '../tiles/Time';
 import Calendar from '../tiles/events/Calendar';
-import Birthdays from '../tiles/events/Birthdays';
 import Movie from  '../tiles/events/Movie';
 import { SiteContext } from '../App';
 import LFPTownCenter from '../tiles/events/LFPTownCenter';
@@ -15,9 +14,7 @@ export default function Events(props: PageProps) {
 
     return (
         <Page navigation={props.navigation}>
-            <Time />
             <Calendar />
-            <Birthdays />
             {events && events.eventData && <Movie {...events.eventData.movies.find((theater: any) => theater.name === 'Cinebarre')} />}
             <LFPTownCenter />
             <LFPTownCenterMusic />

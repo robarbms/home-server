@@ -2,7 +2,7 @@ import React, {createContext, useEffect, useState, MouseEventHandler , useCallba
 import '../styles/site.css';
 import PageRouter from './pages/PageRouter';
 import { getCookie } from './utils/cookies';
-import getPhotos from './utils/getPhotos';
+import backgrounds from '../data/backgrounds';
 
 export type PageRoute = "dashboard" | "home" | "ai" | "frame" | "events";
 
@@ -140,8 +140,6 @@ export default function App (): React.ReactElement {
         });
         const data = await response.json();
         setEventData(data);
-
-        setPrimaryColor(primaryColor);
     }, []);
 
     useEffect(() => {
@@ -157,6 +155,12 @@ export default function App (): React.ReactElement {
     useEffect(() => {
         switch(backgroundImage){
             case 'random':
+                const { innerHeight: height, innerWidth: width } = window;
+                const aspect = width / height;
+                const orientation = aspect > 1.5 ? 'landscape' : aspect < .7 ? 'portrait' : 'squarish';
+                const photos = backgrounds[orientation];
+                setBackgroundImage(photos[Math.floor(Math.random() * photos.length)]);
+                /*
                 (async () => {
                     getPhotos(photoQuery).then((images)=>{
                         setBackgroundImage(images[Math.floor(Math.random() * images.length)].urls.regular);
@@ -167,11 +171,11 @@ export default function App (): React.ReactElement {
                         /*
                         const image = aspect > 1.2 ? "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1746&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" :
                             aspect < .8 ? "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" :
-                        */
                         const image = "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         setBackgroundImage(image);
                     });
                 })();
+                */
                 break;
         }
 

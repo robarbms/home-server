@@ -14,6 +14,7 @@ export type PageProps = {
     children?: React.ReactElement | React.ReactElement[];
     title?: string;
     full?: boolean;
+    className?: string;
 }
 
 /**
@@ -29,7 +30,7 @@ export default function Page(props: PageProps) : React.ReactElement {
     );
 
     return (
-        <div className={`page${settings.theme.isDark ? ' dark' : ''} ${props.full ? 'full-content' : ''} ${props.title ? 'page-with-title' : ''}`}>
+        <div className={`page${settings.theme.isDark ? ' dark' : ''} ${props.full ? 'full-content' : ''} ${props.title ? 'page-with-title' : ''} ${props.className ? props.className : ""}`}>
             {settings.theme.backgroundImage && settings.theme.backgroundImage !== null &&
                 <img className="background-image" src={settings.theme.backgroundImage} alt="" />
             }

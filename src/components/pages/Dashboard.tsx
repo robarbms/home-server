@@ -1,34 +1,165 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import Page, { PageProps } from './Page';
-import Time from '../tiles/Time';
-import Calendar from '../tiles/events/Calendar';
-import Movie from '../tiles/events/Movie';
 import { SiteContext } from '../App';
-import FoodTrucks from '../tiles/events/FoodTrucks';
-import AI from '../tiles/AI';
-import Birthdays from '../tiles/events/Birthdays';
-import Movies from '../tiles/events/Movies';
-import TownCenter from '../tiles/TownCenter';
+import '../../styles/dashboard.css';
+import Time, { updateTimes, timeZones, weekdays, months } from '../tiles/Time';
+import { getBirthdays } from '../tiles/events/Birthdays';
+import { CakeIcon } from '@heroicons/react/24/outline';
 
+const AltTime = (props: {name: string, time: string}) => {
+    return (
+        <div className="alt-time">
+            <label>{props.name}</label>
+            <span>{props.time}</span>
+        </div>
+    );
+}
 
-export default function Dashboard(props: PageProps) {
-    const [ cinebarre, setCinebarre ] = useState<any>();
-    const { events } = useContext(SiteContext);
-
-    if (events && events.eventData && events.eventData.movies && !cinebarre) {
-        const theaterData = events.eventData.movies.find((theater: any) => theater.name === 'Cinebarre');
-        setCinebarre(theaterData);
-    }
+const Event = (props: any) => {
 
     return (
-        <Page navigation={props.navigation}>
-            <Time />
-            <Calendar />
-            <Birthdays />
-            <Movies />
-            <TownCenter />
-            <FoodTrucks />
-            <AI />
+    <div className="dashboard-event">
+        <div className="dash-event-title">
+            {props.name || props.title}
+        </div>
+        <div className="dash-event-venue">{props.venue}</div>
+        <div className="dash-event-time">
+            {props.time && props.time}
+            {props.start_time &&
+                `${props.start_time} - ${props.end_time}`
+            }
+        </div>
+    </div>
+    );
+}
+
+export default function Dashboard(props: PageProps) {
+    const data = useContext(SiteContext);
+    const [ time, setTime ] = useState<any>();
+    const [ date, setDate ] = useState(new Date());
+    const timeHandle = useRef();
+    const birthdays = getBirthdays();
+    const [ events, setEvents ] = useState<any>();
+    const now = new Date();
+
+    useEffect(() => {
+        const timeUpdater = () => updateTimes(timeZones, setTime, date, setDate);
+        timeUpdater();
+        if (timeHandle.current) {
+            clearTimeout(timeHandle.current);
+        }
+
+        timeHandle.current = setInterval(timeUpdater, 30000) as any;
+        return () => clearTimeout(timeHandle.current);
+    }, []);
+
+    useEffect(() => {
+        if (!events && data && data.events && data.events.eventData) {
+            const todaysEvents: any[] = [];
+            const upcomingEvents: any[] = [];
+            const tomorrow = new Date(now.getTime() + 1000 * 60 * 60 * 24);
+            const isToday = (eventDate: Date) => eventDate.getFullYear() === now.getFullYear() && eventDate.getMonth() === now.getMonth() && eventDate.getDate() === now.getDate();
+            const isTomorrow = (eventDate: Date) => eventDate.getFullYear() === tomorrow.getFullYear() && eventDate.getMonth() === tomorrow.getMonth() && eventDate.getDate() === tomorrow.getDate();
+            data.events.eventData.events.forEach((venue: any) => {
+                venue.events.forEach((event: any) => {
+                    let eventDate = new Date(event.date);
+                    event.venue = venue.name || venue.title;
+                    event.type = 'Event';
+                    if (typeof event.date !== 'string' && event.date.day) {
+                        eventDate = new Date(`${event.date.month}/${event.date.day}/${event.date.year}`);
+                    }
+                    if (isToday(eventDate)) {
+                        todaysEvents.push(event);
+                    }
+                    else if (isTomorrow(eventDate)) {
+                        upcomingEvents.push(event);
+                    }
+                });
+                if (venue.music) {
+                    venue.music.forEach((band: any) => {
+                        const eventDate = new Date(`${band.date.month}/${band.date.day}/${band.date.year}`);
+                        band.venue = venue.name;
+                        band.type = 'Music';
+                        if (isToday(eventDate)) {
+                            todaysEvents.push(band);
+                        }
+                        else if (isTomorrow(eventDate)) {
+                            upcomingEvents.push(band);
+                        }
+                    });
+                }
+            });
+            data.events.eventData.food.forEach((venue: any) => {
+                venue.trucks.forEach((truck: any) => {
+                    truck.venue = venue.name;
+                    truck.type = 'Food';
+                    const truckDate = new Date(`${truck.date.month}/${truck.date.day}/${truck.date.year}`);
+                    if (isToday(truckDate)) {
+                        todaysEvents.push(truck);
+                    }
+                    else if (isTomorrow(truckDate)) {
+                        upcomingEvents.push(truck);
+                    }
+                });
+            });
+            const movies: any[] = [];
+            data.events.eventData.movies.forEach((theater: any) => {
+                theater.movies.forEach((movie: any) => {
+                    movies.push({
+                        title: movie.title,
+                        time: movie.times.join(", "),
+                        venue: theater.name,
+                    });
+                });
+            });
+            setEvents({todaysEvents, upcomingEvents, movies});
+        }
+    }, [data]);
+
+    return (
+        <Page className="dashboard" navigation={props.navigation}>
+            <div className="dashboard-content">
+                <div className="dashboard-upper">
+
+                </div>
+                <div className="dashboard-middle">
+                    <div className="dashboard-time">
+                        {time && 
+                            <>
+                                <div className="current-time">{time.current}</div>
+                                {date &&
+                                   <div className="current-date">{weekdays[date.getDay()]} {months[date.getMonth()]} {date.getDate()}</div>
+
+                                }
+                                <div className="alt-times">
+                                    <AltTime name="Boston" time={time.boston} />
+                                    <AltTime name="Hawaii" time={time.hawaii} />
+                                </div>
+                            </>
+                        }
+
+                    </div>
+                </div>
+                <div className="dashboard-lower">
+                        <h2>Todays Events</h2>
+                        {events && events.todaysEvents &&
+                            events.todaysEvents.map((event: any, index: number) => <Event {...event} key={index} />)
+                        }
+                        <h2>Movies</h2>
+                        {events && events.movies &&
+                            events.movies.map((event: any, index: number) => <Event {...event} key={index} />)
+                        }
+                        <h2>Upcoming Events</h2>
+                        {birthdays &&
+                          <div className="dashboard-birthday">
+                            <CakeIcon className="dash-icon" /> {birthdays[0].name}'s birthday in {birthdays[0].daysTill} days.
+                          </div>
+                        }
+                        {events && events.upcomingEvents &&
+                            events.upcomingEvents.map((event: any, index: number) => <Event {...event} key={index} />)
+                        }
+                </div>
+            </div>
         </Page>
     );
 }

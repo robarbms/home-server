@@ -4,7 +4,7 @@ import '../../styles/time.css';
 import WorldLogo from './WorldLogo';
 
 // Helper list containing the names of the weekdays
-const weekdays = [
+export const weekdays = [
     "Sunday",
     "Monday",
     "Tuesday",
@@ -31,7 +31,7 @@ export const months = [
 ];
 
 // Properties for the times list
-type Times = {
+export type Times = {
     current?: string,
     seattle?: string,
     boston?: string,
@@ -40,16 +40,16 @@ type Times = {
 }
 
 // Keys used in the Times type
-type TimesKeys = keyof Times;
+export type TimesKeys = keyof Times;
 
 // Properties used for the TimeZone component
-type TimeZoneProps = {
+export type TimeZoneProps = {
     label: string,
     time?: string
 }
 
 // Properties used by the date object
-type DateProps = {
+export type DateProps = {
     weekday: string,
     day: number,
     month: string,
@@ -61,9 +61,10 @@ type DateProps = {
  * @param props 
  * @returns 
  */
-function TimeZone(props: TimeZoneProps) {
+export function TimeZone(props: TimeZoneProps) {
     const {label, time} = props;
     const capitolize = (str: string) => str.substr(0, 1).toUpperCase() + str.substr(1);
+
     return (
         <div className="time-zone">
             <h3>{capitolize(label)}</h3>
@@ -74,6 +75,58 @@ function TimeZone(props: TimeZoneProps) {
     )
 }
 
+export const updateDate = (setDate: Function) => {
+    const now = new Date();
+    const date_parse: DateProps = {
+        weekday: weekdays[now.getDay()],
+        month: months[now.getMonth()],
+        day: now.getDate(),
+        year: now.getFullYear()
+    };
+    setDate(date_parse);
+}
+
+export function updateTimes(timeZones: any, setTime: Function, date: any, setDate: Function) {
+    const now: Date = new Date();
+    const base_opts: Intl.DateTimeFormatOptions = {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+    }
+
+    const date_opts = {
+        weekday: "short",
+    }
+
+    const newTime: Times = {};
+
+    for (let key in timeZones) {
+        if (key == "seattle") continue;
+        const timeZone: string | undefined = timeZones[key as keyof Times];
+        const opts = Object.assign({}, base_opts, (key === "current" ? {} : Object.assign({}, date_opts, { timeZone })));
+        const formatter = new Intl.DateTimeFormat([], opts);
+        const time = formatter.format(now);
+        if (time !== newTime["current"]) {
+            newTime[key as keyof Times] = time;
+        }
+    }
+    newTime["current"] = newTime.current?.replace(/AM|PM/i, "");
+
+    setTime(newTime);
+    if (date && date.day && now.getDate() != date.day) {
+        updateDate(setDate);
+    }
+}
+
+export const timeZones: Times = {
+    current: "",
+    seattle: "America/Los_Angeles",
+    boston: "America/New_York",
+    // london: "Europe/London",
+    hawaii: "Pacific/Honolulu"
+}
+
+
 /**
  * Rendering for the Time card
  * @returns 
@@ -82,57 +135,6 @@ export default function Time() {
     const [time, setTime]: [Times | undefined, (times: Times) => void] = useState();
     const [date, setDate]: [DateProps | undefined, (date: DateProps) => void] = useState();
     const timeHandle = useRef();
-    const timeZones: Times = {
-        current: "",
-        seattle: "America/Los_Angeles",
-        boston: "America/New_York",
-        // london: "Europe/London",
-        hawaii: "Pacific/Honolulu"
-    }
-
-    const updateTimes = () => {
-        const now: Date = new Date();
-        const getMinutes = (mins: number): string => `${mins < 10 ? '0' : ''}${mins}`;
-        const base_opts: Intl.DateTimeFormatOptions = {
-            hour: 'numeric',
-            minute: '2-digit',
-            hour12: true,
-        }
-
-        const date_opts = {
-            weekday: "short",
-        }
-
-        const newTime: Times = {};
-
-        for (let key in timeZones) {
-            if (key == "seattle") continue;
-            const timeZone: string | undefined = timeZones[key as keyof Times];
-            const opts = Object.assign({}, base_opts, (key === "current" ? {} : Object.assign({}, date_opts, { timeZone })));
-            const formatter = new Intl.DateTimeFormat([], opts);
-            const time = formatter.format(now);
-            if (time !== newTime["current"]) {
-                newTime[key as keyof Times] = time;
-            }
-        }
-        newTime["current"] = newTime.current?.replace(/AM|PM/i, "");
-
-        setTime(newTime);
-        if (date && date.day && now.getDate() != date.day) {
-            updateDate();
-        }
-    }
-
-    const updateDate = () => {
-        const now = new Date();
-        const date_parse: DateProps = {
-            weekday: weekdays[now.getDay()],
-            month: months[now.getMonth()],
-            day: now.getDate(),
-            year: now.getFullYear()
-        };
-        setDate(date_parse);
-    }
 
     const getOtherZones = (): TimeZoneProps[] => {
         const zones = [];
@@ -148,14 +150,13 @@ export default function Time() {
     }
 
     useEffect(() => {
-        updateTimes();
+        const timeUpdater = () => updateTimes(timeZones, setTime, date, setDate);
+        timeUpdater();
         if (timeHandle.current) {
             clearTimeout(timeHandle.current);
         }
 
-        updateDate();
-
-        timeHandle.current = setInterval(updateTimes, 30000) as any;
+        timeHandle.current = setInterval(timeUpdater, 30000) as any;
         return () => clearTimeout(timeHandle.current);
     }, []);
     

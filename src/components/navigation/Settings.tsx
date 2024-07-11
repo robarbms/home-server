@@ -14,7 +14,7 @@ export default function Settings() {
     const onImageChange = (event: RadioChangeEvent) => {
         const {value } = event.target;
 
-        
+
         
         switch(value) {
             case 'no-image':
@@ -37,7 +37,7 @@ export default function Settings() {
             <ColorPicker accents={settings.accents} />
             <Divider />
             <h3>Background Image</h3>
-            <Radio.Group className="settings-image-picker" onChange={onImageChange} defaultValue="no-image" buttonStyle="solid">
+            <Radio.Group className="settings-image-picker" onChange={onImageChange} defaultValue="random-image" buttonStyle="solid">
                 <Radio.Button value="no-image">No image</Radio.Button>
                 <Radio.Button value="image">Image</Radio.Button>
                 <Radio.Button value="random-image">Random image</Radio.Button>
