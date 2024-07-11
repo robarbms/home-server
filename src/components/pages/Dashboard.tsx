@@ -141,14 +141,19 @@ export default function Dashboard(props: PageProps) {
                     </div>
                 </div>
                 <div className="dashboard-lower">
+                    <section>
                         <h2>Todays Events</h2>
                         {events && events.todaysEvents &&
                             events.todaysEvents.map((event: any, index: number) => <Event {...event} key={index} />)
                         }
-                        <h2>Movies</h2>
+                    </section>
+                    <section>
+                    <h2>Movies</h2>
                         {events && events.movies &&
                             events.movies.map((event: any, index: number) => <Event {...event} key={index} />)
                         }
+                    </section>
+                    <section>
                         <h2>Upcoming Events</h2>
                         {birthdays &&
                           <div className="dashboard-birthday">
@@ -158,6 +163,7 @@ export default function Dashboard(props: PageProps) {
                         {events && events.upcomingEvents &&
                             events.upcomingEvents.map((event: any, index: number) => <Event {...event} key={index} />)
                         }
+                    </section>
                 </div>
             </div>
         </Page>

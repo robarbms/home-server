@@ -4,12 +4,19 @@
     max-width: none;
 }
 
+.dashboard section {
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 0 40px;
+}
+
 .dashboard-content {
     height: 100%;
 }
 
 .dashboard-upper {
-    height: 40vh;
+    height: 30vh;
 }
 
 .dashboard-middle {
@@ -39,7 +46,7 @@
 
 .current-time {
     font-size: 100px;
-    line-height: 1.25em;
+    line-height: 1em;
     color: var(--accent);
     font-family: 'poppins-thin';
     font-weight: 400;
@@ -75,6 +82,12 @@
 
 div + h2 {
     margin-top: 40px;
+}
+
+@media screen and (max-width: 900px) {
+    .dashboard section {
+        width: auto;
+    }
 }
 
 @media screen and (max-width: 680px) {
