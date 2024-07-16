@@ -8,7 +8,7 @@
     width: 30%;
     display: inline-block;
     vertical-align: top;
-    margin: 0 0 40px;
+    margin: 0 20px 40px 0;
 }
 
 .dashboard-content {
@@ -16,14 +16,16 @@
 }
 
 .dashboard-upper {
-    height: 30vh;
+    height: 20vh;
 }
 
 .dashboard-middle {
     background: rgba(255, 255, 255, .5);
     backdrop-filter: blur(6px);
-    padding: 40px;
+    padding: 100px 40px;
     margin: 0 0 10px;
+    width: 25%;
+    text-align: center;
 }
 
 .dashboard-lower {
@@ -93,6 +95,8 @@ div + h2 {
 
     .dashboard-middle {
         display: block;
+        width: auto;
+        text-align: left;
     }
 
     .dashboard section {
