@@ -18,10 +18,13 @@
 .event-movie-time {
     display: inline-block;
     background: #aaa;
-    padding: 3px 5px;
-    margin: 0 10px 10px 0;
+    padding: 2px 5px;
+    margin: 0 5px 0 0;
     color: #fff;
     border-radius: 2px;
+    font-size: 10px;
+    width: 48px;
+    text-align: center;
 }
 
 .truck {
@@ -45,8 +48,11 @@
 }
 
 .event-movie {
+}
+
+.event-movie h4 {
     display: inline-block;
-    max-width: 300px;
+    width: 300px;
 }
 
 .truck-table {
@@ -94,6 +100,11 @@
 @media screen and (max-width: 600px) {
     .event-movies {
         height: auto;
+    }
+
+    .event-movie h4 {
+        display: block;
+        width: auto;
     }
 
     
