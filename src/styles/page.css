@@ -27,6 +27,12 @@
 
 .full-content .content {
     max-width: none;
+    margin: 0;
+    position: absolute;
+    top: 32px;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 /* header */
@@ -60,7 +66,7 @@
 
 .header-link a,
 .header-link span {
-    padding: 10px 20px;
+    padding: 8px 20px;
     cursor: pointer;
 }
 
@@ -74,7 +80,7 @@
 .header-link a:hover,
 .header-link span:hover {
     color: var(--accent);
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     border-bottom: 1px solid var(--accent);
 }
 
