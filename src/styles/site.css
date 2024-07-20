@@ -132,6 +132,11 @@ a.button {
     font-size: 30px;
 }
 
+ul {
+    margin: 0;
+    line-height: 1.25em;
+}
+
 @media screen and (max-width: 600px) {
     .mobile-menu-open {
         display: block;
