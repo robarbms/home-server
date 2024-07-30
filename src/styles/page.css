@@ -21,7 +21,7 @@
     padding: var(--spacing);
     box-sizing: border-box;
     align-content: start;
-    margin: 30% auto 0;
+    margin: 42px auto 0;
     position: relative;
 }
 
@@ -114,6 +114,10 @@
 @media screen and (max-width: 686px) {
     body {
         line-height: 2em;
+    }
+
+    .content {
+        margin: 30% auto 0;
     }
 
     div.card {

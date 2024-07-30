@@ -25,7 +25,7 @@ export const getBirthdays = () => {
 
     // move dates before todays date, to the end of the list
     const idxNew = orderedBd.findIndex(bd => getDate(bd) > now.getTime());
-    const updated: Array<BirthdayProps> = orderedBd.slice(idxNew).concat(orderedBd.slice(0, idxNew)).slice(0, 6) as Array<BirthdayProps>;
+    const updated: Array<BirthdayProps> = orderedBd.slice(idxNew).concat(orderedBd.slice(0, idxNew)).slice(0, 10) as Array<BirthdayProps>;
     const withDaysTill = updated.map((bd) => ({...bd, daysTill: Math.round((getDate(bd) - now.getTime()) / 1000 / 60 / 60 / 24)}));
     return withDaysTill;
 }
