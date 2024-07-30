@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Card from '../Card';
 import { SiteContext } from '../../App';
 import '../../../styles/events.css';
+import { getWeekday } from '../../utils/dates';
 
 const LFPEvent = (props: any) => {
     const months = [ "January", "February", "March", "April", "May", "June",
@@ -11,7 +12,7 @@ const LFPEvent = (props: any) => {
         <div className="event">
             <h4 style={{"marginTop": "10px"}}>{props.title}</h4>
             <div>{props.location}</div>
-            <div>{months[props.date.month - 1]} {props.date.day}, {props.start_time} - {props.end_time}</div>
+            <div>{getWeekday(props.date)}, {months[props.date.month - 1]} {props.date.day}, {props.start_time} - {props.end_time}</div>
         </div>
     )
 }

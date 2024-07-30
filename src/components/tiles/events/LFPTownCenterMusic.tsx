@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Card from '../Card';
 import { SiteContext } from '../../App';
 import '../../../styles/events.css';
+import { getWeekday } from '../../utils/dates';
 
 const LFPBand = (props: any) => {
     const months = [ "January", "February", "March", "April", "May", "June",
@@ -12,7 +13,7 @@ const LFPBand = (props: any) => {
         <div className="band">
             <h4>{title}</h4>
             <div>{props.genre}</div>
-            <div>{months[props.date.month - 1]} {props.date.day}, {props.start_time} - {props.end_time}</div>
+            <div>{getWeekday(props.date)}, {months[props.date.month - 1]} {props.date.day}, {props.start_time} - {props.end_time}</div>
         </div>
     )
 }
