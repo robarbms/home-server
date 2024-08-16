@@ -149,6 +149,9 @@ export default function App (): React.ReactElement {
             document.querySelector('body')?.style.setProperty('--accent', cookies.accent as any);
             _setPrimaryColor(cookies.accent as any);
         }
+        else {
+            document.querySelector('body')?.style.setProperty('--accent', primaryColor as any);
+        }
         fetchData(); // Fetch data when the component mounts
     }, []);
 
