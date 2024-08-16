@@ -84,6 +84,10 @@ div + h2 {
     margin-top: 40px;
 }
 
+.dash-search {
+    padding: 20px 0 0;
+}
+
 @media screen and (max-width: 680px) {
     .dashboard-time {
         width: 100%;

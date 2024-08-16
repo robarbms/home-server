@@ -5,6 +5,7 @@ import '../../styles/dashboard.css';
 import Time, { updateTimes, timeZones, weekdays, months } from '../tiles/Time';
 import { getBirthdays } from '../tiles/events/Birthdays';
 import { CakeIcon } from '@heroicons/react/24/outline';
+import { Input } from 'antd';
 
 const AltTime = (props: {name: string, time: string}) => {
     return (
@@ -41,6 +42,12 @@ export default function Dashboard(props: PageProps) {
     const birthdays = getBirthdays();
     const [ events, setEvents ] = useState<any>();
     const now = new Date();
+    const [search, setSearch] = useState('');
+
+    const webSearch = () => {
+        if (!search) return;
+
+    }
 
     useEffect(() => {
         const timeUpdater = () => updateTimes(timeZones, setTime, date, setDate);
@@ -137,7 +144,11 @@ export default function Dashboard(props: PageProps) {
                                 </div>
                             </>
                         }
-
+                        <div className="dash-search">
+                            <form action="http://home:42003/search" method="GET" target="_blank" rel="noopener noreferrer">
+                                <Input.Search className="dash-search-input" placeholder='Web search' name="q" allowClear  />
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div className="dashboard-lower">
