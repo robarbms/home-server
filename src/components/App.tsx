@@ -144,9 +144,10 @@ export default function App (): React.ReactElement {
 
     useEffect(() => {
         const cookies = getCookie();
+
         if (cookies) {
             _setIsDark(cookies.isDark === 'true');
-            document.querySelector('body')?.style.setProperty('--accent', cookies.accent as any);
+            document.querySelector('body')?.style.setProperty('--accent', (cookies.accent as any || primaryColor));
             _setPrimaryColor(cookies.accent as any);
         }
         else {

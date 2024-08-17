@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useState, useRef, createRef } from 'react';
 import Page, { PageProps } from './Page';
 import { SiteContext } from '../App';
 import '../../styles/dashboard.css';
@@ -42,11 +42,12 @@ export default function Dashboard(props: PageProps) {
     const birthdays = getBirthdays();
     const [ events, setEvents ] = useState<any>();
     const now = new Date();
-    const [search, setSearch] = useState('');
+    const searchForm = useRef() as React.MutableRefObject<HTMLFormElement> | null;
 
     const webSearch = () => {
-        if (!search) return;
-
+        if (searchForm) {
+            searchForm.current.submit();
+        }
     }
 
     useEffect(() => {
@@ -145,8 +146,8 @@ export default function Dashboard(props: PageProps) {
                             </>
                         }
                         <div className="dash-search">
-                            <form action="http://home:42003/search" method="GET" target="_blank" rel="noopener noreferrer">
-                                <Input.Search className="dash-search-input" placeholder='Web search' name="q" allowClear  />
+                            <form action="http://home:42003/search" method="GET" target="_blank" rel="noopener noreferrer" ref={searchForm}>
+                                <Input.Search className="dash-search-input" placeholder='Web search' name="q" allowClear onSearch={webSearch} />
                             </form>
                         </div>
                     </div>
