@@ -3,6 +3,7 @@ import '../styles/site.css';
 import PageRouter from './pages/PageRouter';
 import { getCookie } from './utils/cookies';
 import backgrounds from '../data/backgrounds';
+import { weatherApiKey } from '../data/private';
 
 export type PageRoute = "dashboard" | "home" | "ai" | "frame" | "events";
 
@@ -33,6 +34,10 @@ interface IContext {
     events: {
         eventData: any;
         setEventData: React.Dispatch<React.SetStateAction<any>>;
+    },
+    weather: {
+        weatherData: any;
+        setWeatherData: React.Dispatch<React.SetStateAction<any>>;
     }
 }
 
@@ -67,6 +72,10 @@ export const SiteContext = createContext<IContext>({
     events: {
         eventData: null,
         setEventData: ((value: any) => {}) as React.Dispatch<React.SetStateAction<any>>,
+    },
+    weather: {
+        weatherData: null,
+        setWeatherData: (() => {}) as React.Dispatch<React.SetStateAction<any>>,
     }
 });
 
@@ -83,6 +92,7 @@ export default function App (): React.ReactElement {
     const [ userName, setUserName] = useState<string>("");
     const [ frame, setFrame ] = useState<string | null>(null);
     const [ eventData, setEventData ] = useState<any>();
+    const [ weatherData, setWeatherData ] = useState<any>();
     const [ backgroundImage, setBackgroundImage ] = useState<null | "random" | string>('random');
     const [ photoQuery, setPhotoQuery ] = useState<string>("Paris");
 
@@ -128,10 +138,15 @@ export default function App (): React.ReactElement {
         events: {
             eventData,
             setEventData
+        },
+        weather: {
+            weatherData,
+            setWeatherData
         }
     };
 
     const fetchData = useCallback(async () => {
+        console.log("Fetching data");
         const response = await fetch('/events.json', {
             headers: {
                 "Content-Type": "application/json",
@@ -139,7 +154,12 @@ export default function App (): React.ReactElement {
             }
         });
         const data = await response.json();
+
+        const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Lake%20Forest%20Park&appid=${weatherApiKey}&units=imperial`);
+        const weatherData = await weatherResponse.json();
+
         setEventData(data);
+        setWeatherData(weatherData);
     }, []);
 
     useEffect(() => {

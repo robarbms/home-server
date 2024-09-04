@@ -7,7 +7,9 @@ import { getBirthdays } from '../tiles/events/Birthdays';
 import { CakeIcon } from '@heroicons/react/24/outline';
 import { Input } from 'antd';
 
+// Alternate time zones
 const AltTime = (props: {name: string, time: string}) => {
+
     return (
         <div className="alt-time">
             <label>{props.name}</label>
@@ -16,6 +18,7 @@ const AltTime = (props: {name: string, time: string}) => {
     );
 }
 
+// An event rendering
 const Event = (props: any) => {
 
     return (
@@ -34,6 +37,7 @@ const Event = (props: any) => {
     );
 }
 
+// Dashboard component
 export default function Dashboard(props: PageProps) {
     const data = useContext(SiteContext);
     const [ time, setTime ] = useState<any>();
@@ -41,15 +45,18 @@ export default function Dashboard(props: PageProps) {
     const timeHandle = useRef();
     const birthdays = getBirthdays();
     const [ events, setEvents ] = useState<any>();
+    const [ weather, setWeather ] = useState<any>();
     const now = new Date();
     const searchForm = useRef() as React.MutableRefObject<HTMLFormElement> | null;
 
+    // Handles web searches for the search form
     const webSearch = () => {
         if (searchForm) {
             searchForm.current.submit();
         }
     }
 
+    // Updates the times for all time zones every 30 seconds
     useEffect(() => {
         const timeUpdater = () => updateTimes(timeZones, setTime, date, setDate);
         timeUpdater();
@@ -61,6 +68,7 @@ export default function Dashboard(props: PageProps) {
         return () => clearTimeout(timeHandle.current);
     }, []);
 
+    // Parses events weather from the data object when ever it is updated
     useEffect(() => {
         if (!events && data && data.events && data.events.eventData) {
             const todaysEvents: any[] = [];
@@ -68,6 +76,7 @@ export default function Dashboard(props: PageProps) {
             const tomorrow = new Date(now.getTime() + 1000 * 60 * 60 * 24);
             const isToday = (eventDate: Date) => eventDate.getFullYear() === now.getFullYear() && eventDate.getMonth() === now.getMonth() && eventDate.getDate() === now.getDate();
             const isTomorrow = (eventDate: Date) => eventDate.getFullYear() === tomorrow.getFullYear() && eventDate.getMonth() === tomorrow.getMonth() && eventDate.getDate() === tomorrow.getDate();
+            // Parsing events at local venues
             data.events.eventData.events.forEach((venue: any) => {
                 venue.events.forEach((event: any) => {
                     let eventDate = new Date(event.date);
@@ -97,6 +106,7 @@ export default function Dashboard(props: PageProps) {
                     });
                 }
             });
+            // Parses local food trucks
             data.events.eventData.food.forEach((venue: any) => {
                 venue.trucks.forEach((truck: any) => {
                     truck.venue = venue.name;
@@ -111,6 +121,7 @@ export default function Dashboard(props: PageProps) {
                 });
             });
             const movies: any[] = [];
+            // Parses movies playing at local theaters
             data.events.eventData.movies.forEach((theater: any) => {
                 theater.movies.forEach((movie: any) => {
                     movies.push({
@@ -121,6 +132,17 @@ export default function Dashboard(props: PageProps) {
                 });
             });
             setEvents({todaysEvents, upcomingEvents, movies});
+
+            // Parses weather data
+            const wd = data.weather.weatherData;
+            console.log({data, wd});
+            setWeather({
+                temperature: wd?.main?.temp,
+                min: wd?.main?.temp_min,
+                max: wd?.main?.temp_max,
+                conditions: wd?.weather[0]?.main,
+                humidity: wd?.main?.humidity,
+            });
         }
     }, [data]);
 
@@ -138,6 +160,11 @@ export default function Dashboard(props: PageProps) {
                                 {date &&
                                    <div className="current-date">{weekdays[date.getDay()]} {months[date.getMonth()]} {date.getDate()}</div>
 
+                                }
+                                {weather &&
+                                    <div className="weather">
+                                        {weather.conditions} - {weather.temperature}°F
+                                    </div>
                                 }
                                 <div className="alt-times">
                                     <AltTime name="Boston" time={time.boston} />
